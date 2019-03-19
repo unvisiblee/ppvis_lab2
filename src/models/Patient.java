@@ -26,18 +26,30 @@ class Patient {
     }
 
     public static Patient[] all() {
-        Patient[] patients;
+        Patient[] patients = {};
 //        Parse file
         return patients;
     }
 
     public void update(String fullName, String address, Date birthDate, String doctorFullName, Date appointmenthDate, String diagnosis) {
-        if (fullName.isEmpty()) this.fullName = fullName;
-        if (address.isEmpty()) this.address = address;
-        if (birthDate == null) this.birthDate = birthDate ;
-        if (doctorFullName.isEmpty()) this.doctorFullName = doctorFullName;
-        if (appointmenthDate == null) this.appointmenthDate = appointmenthDate;
-        if (diagnosis.isEmpty()) this.diagnosis = diagnosis;
+        if (fullName.isEmpty()) {
+            this.fullName = fullName;
+        }
+        if (address.isEmpty()) {
+            this.address = address;
+        }
+        if (birthDate == null) {
+            this.birthDate = birthDate ;
+        }
+        if (doctorFullName.isEmpty()) {
+            this.doctorFullName = doctorFullName;
+        }
+        if (appointmenthDate == null) {
+            this.appointmenthDate = appointmenthDate;
+        }
+        if (diagnosis.isEmpty()) {
+            this.diagnosis = diagnosis;
+        }
     }
 
     public String getFullName() {
