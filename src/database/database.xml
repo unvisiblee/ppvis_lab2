@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hospital>
+    <patients>
+        <patient id="1">
+            <fullName>John Holt</fullName>
+            <address>addr</address>
+            <birthDate>26.07.2000</birthDate>
+            <doctorFullName>Who</doctorFullName>
+            <appointmenthDate>19.03.2019</appointmenthDate>
+            <diagnosis>Johny they are on the trees</diagnosis>
+        </patient>
+        <patient id="2">
+            <fullName>Alex Frost</fullName>
+            <address>addr2</address>
+            <birthDate>21.05.1337</birthDate>
+            <doctorFullName>Watson</doctorFullName>
+            <appointmenthDate>20.01.2021</appointmenthDate>
+            <diagnosis>Where is my legs</diagnosis>
+        </patient>
+    </patients>
+</hospital>
