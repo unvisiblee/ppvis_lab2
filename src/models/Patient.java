@@ -2,7 +2,7 @@ package models;
 
 import java.util.Date;
 
-class Patient {
+public class Patient {
     private String fullName;
     private String address;
     private Date birthDate;
@@ -10,46 +10,17 @@ class Patient {
     private Date appointmenthDate;
     private String diagnosis;
 
-    public Patient(String fullName, String address, Date birthDate, String doctorFullName, Date appointmenthDate) {
-        this(fullName, address, birthDate, doctorFullName, appointmenthDate, "No diagnosis");
+    public Patient() {
+        this("Name unknown", "Address unknown", null, "No doctor", null, "No diagnosis");
     }
 
     public Patient(String fullName, String address, Date birthDate, String doctorFullName, Date appointmenthDate, String diagnosis) {
         this.fullName = fullName;
         this.address = address;
-        this.birthDate = birthDate ;
+        this.birthDate = birthDate;
         this.doctorFullName = doctorFullName;
         this.appointmenthDate = appointmenthDate;
         this.diagnosis = diagnosis;
-
-//        commit to file
-    }
-
-    public static Patient[] all() {
-        Patient[] patients = {};
-//        Parse file
-        return patients;
-    }
-
-    public void update(String fullName, String address, Date birthDate, String doctorFullName, Date appointmenthDate, String diagnosis) {
-        if (fullName.isEmpty()) {
-            this.fullName = fullName;
-        }
-        if (address.isEmpty()) {
-            this.address = address;
-        }
-        if (birthDate == null) {
-            this.birthDate = birthDate ;
-        }
-        if (doctorFullName.isEmpty()) {
-            this.doctorFullName = doctorFullName;
-        }
-        if (appointmenthDate == null) {
-            this.appointmenthDate = appointmenthDate;
-        }
-        if (diagnosis.isEmpty()) {
-            this.diagnosis = diagnosis;
-        }
     }
 
     public String getFullName() {
