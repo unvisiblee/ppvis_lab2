@@ -1,8 +1,8 @@
 package database;
 
 import helpers.PatientsXMLReader;
+import helpers.PatientsXMLWriter;
 import models.Patient;
-
 import java.util.ArrayList;
 
 public class PatientsLocalStorage {
@@ -25,11 +25,11 @@ public class PatientsLocalStorage {
     }
 
     public void commitAllToFile(String path) {
-
+        new PatientsXMLWriter(path).writeAll(patients);
     }
 
     public void commitAllToFile() {
-
+        new PatientsXMLWriter().writeAll(patients);
     }
 
     public ArrayList<Patient> getPatients() {

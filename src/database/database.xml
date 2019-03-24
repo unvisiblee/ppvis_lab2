@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <hospital>
     <patients>
-        <patient id="1">
+        <patient>
             <fullName>John Holt</fullName>
             <address>addr</address>
             <birthDate>26.07.2000</birthDate>
             <doctorFullName>Who</doctorFullName>
-            <appointmenthDate>19.03.2019</appointmenthDate>
+            <appointmentDate>19.03.2019</appointmentDate>
             <diagnosis>Johny they are on the trees</diagnosis>
         </patient>
-        <patient id="2">
+        <patient>
             <fullName>Alex Frost</fullName>
             <address>addr2</address>
             <birthDate>21.05.1337</birthDate>
             <doctorFullName>Watson</doctorFullName>
-            <appointmenthDate>20.01.2021</appointmenthDate>
+            <appointmentDate>20.01.2021</appointmentDate>
             <diagnosis>Where is my legs</diagnosis>
         </patient>
     </patients>

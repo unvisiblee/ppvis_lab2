@@ -1,11 +1,9 @@
 package helpers;
 
 import models.Patient;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,20 +13,9 @@ public class PatientsHandler extends DefaultHandler {
     private ArrayList<Patient> patients;
     private Patient patient;
     private String currentElement;
-    private SimpleDateFormat format = new SimpleDateFormat("dd.mm.yyyy");
 
     public ArrayList<Patient> getPatients() {
         return patients;
-    }
-
-    @Override
-    public void startDocument() throws SAXException {
-        System.out.println("Parsing...");
-    }
-
-    @Override
-    public void endDocument() {
-        System.out.println("Finish parsing.");
     }
 
     @Override
@@ -59,25 +46,13 @@ public class PatientsHandler extends DefaultHandler {
             patient.setAddress(text(ch, start, length));
         }
         if (currentElement.equals("birthDate")) {
-            Date date = null;
-            try {
-                date = format.parse(text(ch, start, length));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            patient.setBirthDate(date);
+            patient.setBirthDate(getDate(text(ch, start, length)));
         }
         if (currentElement.equals("doctorFullName")) {
             patient.setDoctorFullName(text(ch, start, length));
         }
-        if (currentElement.equals("appointmenthDate")) {
-            Date date = null;
-            try {
-                date = format.parse(text(ch, start, length));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            patient.setAppointmenthDate(date);
+        if (currentElement.equals("appointmentDate")) {
+            patient.setAppointmentDate(getDate(text(ch, start, length)));
         }
         if (currentElement.equals("diagnosis")) {
             patient.setDiagnosis(text(ch, start, length));
@@ -86,5 +61,16 @@ public class PatientsHandler extends DefaultHandler {
 
     private String text(char[] ch, int start, int length) {
         return new String(ch, start, length);
+    }
+
+    private Date getDate(String dateString) {
+        SimpleDateFormat format = new SimpleDateFormat("dd.mm.yyyy");
+        Date date = null;
+        try {
+            date = format.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 }

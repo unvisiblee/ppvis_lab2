@@ -7,19 +7,19 @@ public class Patient {
     private String address;
     private Date birthDate;
     private String doctorFullName;
-    private Date appointmenthDate;
+    private Date appointmentDate;
     private String diagnosis;
 
     public Patient() {
         this("Name unknown", "Address unknown", null, "No doctor", null, "No diagnosis");
     }
 
-    public Patient(String fullName, String address, Date birthDate, String doctorFullName, Date appointmenthDate, String diagnosis) {
+    public Patient(String fullName, String address, Date birthDate, String doctorFullName, Date appointmentDate, String diagnosis) {
         this.fullName = fullName;
         this.address = address;
         this.birthDate = birthDate;
         this.doctorFullName = doctorFullName;
-        this.appointmenthDate = appointmenthDate;
+        this.appointmentDate = appointmentDate;
         this.diagnosis = diagnosis;
     }
 
@@ -39,8 +39,8 @@ public class Patient {
         return doctorFullName;
     }
 
-    public Date getAppointmenthDate() {
-        return appointmenthDate;
+    public Date getAppointmentDate() {
+        return appointmentDate;
     }
 
     public String getDiagnosis() {
@@ -63,8 +63,8 @@ public class Patient {
         this.doctorFullName = doctorFullName;
     }
 
-    public void setAppointmenthDate(Date appointmenthDate) {
-        this.appointmenthDate = appointmenthDate;
+    public void setAppointmentDate(Date appointmentDate) {
+        this.appointmentDate = appointmentDate;
     }
 
     public void setDiagnosis(String diagnosis) {
