@@ -1,5 +1,6 @@
 package models;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Patient {
@@ -35,12 +36,22 @@ public class Patient {
         return birthDate;
     }
 
+    public String getBirthDateString() {
+        SimpleDateFormat format = new SimpleDateFormat("dd.mm.yyyy");
+        return format.format(getBirthDate());
+    }
+
     public String getDoctorFullName() {
         return doctorFullName;
     }
 
     public Date getAppointmentDate() {
         return appointmentDate;
+    }
+
+    public String getAppointmentDateString() {
+        SimpleDateFormat format = new SimpleDateFormat("dd.mm.yyyy");
+        return format.format(getAppointmentDate());
     }
 
     public String getDiagnosis() {

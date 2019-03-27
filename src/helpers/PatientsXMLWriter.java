@@ -2,7 +2,6 @@ package helpers;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -40,7 +39,6 @@ public class PatientsXMLWriter {
             Node patientsTag = document.getElementsByTagName("patients").item(0);
             removeAll(document, Node.ELEMENT_NODE, "patient");
 
-            SimpleDateFormat format = new SimpleDateFormat("dd.mm.yyyy");
             for(Patient patient : patients) {
                 Element patientElement = document.createElement("patient");
                 patientsTag.appendChild(patientElement);
@@ -54,7 +52,7 @@ public class PatientsXMLWriter {
                 patientElement.appendChild(address);
 
                 Element birthDate = document.createElement("birthDate");
-                birthDate.appendChild(document.createTextNode(format.format(patient.getBirthDate())));
+                birthDate.appendChild(document.createTextNode(patient.getBirthDateString()));
                 patientElement.appendChild(birthDate);
 
                 Element doctorFullName = document.createElement("doctorFullName");
@@ -62,7 +60,7 @@ public class PatientsXMLWriter {
                 patientElement.appendChild(doctorFullName);
 
                 Element appointmentDate = document.createElement("appointmentDate");
-                appointmentDate.appendChild(document.createTextNode(format.format(patient.getAppointmentDate())));
+                appointmentDate.appendChild(document.createTextNode(patient.getAppointmentDateString()));
                 patientElement.appendChild(appointmentDate);
 
                 Element diagnosis = document.createElement("diagnosis");
@@ -70,7 +68,6 @@ public class PatientsXMLWriter {
                 patientElement.appendChild(diagnosis);
             }
 
-//          TODO: normalize
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             transformer.setOutputProperty(OutputKeys.METHOD, "xml");

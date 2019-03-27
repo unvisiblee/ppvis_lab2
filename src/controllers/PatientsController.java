@@ -1,6 +1,6 @@
 package controllers;
 
-import views.MainWindow;
+import views.IndexWindow;
 import database.PatientsLocalStorage;
 
 public class PatientsController {
@@ -12,7 +12,11 @@ public class PatientsController {
     }
 
     public void index() {
-        new MainWindow(this).show();
+        new IndexWindow(this).show();
+    }
+
+    public PatientsLocalStorage getPatients() {
+        return patients;
     }
 
     private void updateLocalStorage(String path) {
