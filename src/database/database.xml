@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <hospital>
+
     <patients>
         <patient>
             <fullName>John Holt</fullName>
@@ -18,4 +19,5 @@
             <diagnosis>Where is my legs</diagnosis>
         </patient>
     </patients>
+    
 </hospital>
