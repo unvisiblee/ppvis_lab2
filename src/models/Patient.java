@@ -4,20 +4,26 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Patient {
-    private String fullName;
-    private String address;
+    private String name;
+    private String surname;
+    private String city;
+    private String street;
+    private String buildingNumber;
     private Date birthDate;
     private String doctorFullName;
     private Date appointmentDate;
     private String diagnosis;
 
     public Patient() {
-        this("Name unknown", "Address unknown", null, "No doctor", null, "No diagnosis");
+        this("", "", "", "", "", null, "", null, "");
     }
 
-    public Patient(String fullName, String address, Date birthDate, String doctorFullName, Date appointmentDate, String diagnosis) {
-        this.fullName = fullName;
-        this.address = address;
+    public Patient(String name, String surname, String city, String street, String buildingNumber, Date birthDate, String doctorFullName, Date appointmentDate, String diagnosis) {
+        this.name = name;
+        this.surname = surname;
+        this.city = city;
+        this.street = street;
+        this.buildingNumber = buildingNumber;
         this.birthDate = birthDate;
         this.doctorFullName = doctorFullName;
         this.appointmentDate = appointmentDate;
@@ -25,11 +31,31 @@ public class Patient {
     }
 
     public String getFullName() {
-        return fullName;
+        return name + " " + surname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
     }
 
     public String getAddress() {
-        return address;
+        return city + ", " + street + " " + buildingNumber;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getBuildingNumber() {
+        return buildingNumber;
     }
 
     public Date getBirthDate() {
@@ -58,12 +84,24 @@ public class Patient {
         return diagnosis;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public void setBuildingNumber(String buildingNumber) {
+        this.buildingNumber = buildingNumber;
     }
 
     public void setBirthDate(Date birthDate) {

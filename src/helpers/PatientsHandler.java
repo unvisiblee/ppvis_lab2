@@ -39,11 +39,20 @@ public class PatientsHandler extends DefaultHandler {
         if (currentElement.equals("patient")) {
             patient = new Patient();
         }
-        if (currentElement.equals("fullName")) {
-            patient.setFullName(text(ch, start, length));
+        if (currentElement.equals("name")) {
+            patient.setName(text(ch, start, length));
         }
-        if (currentElement.equals("address")) {
-            patient.setAddress(text(ch, start, length));
+        if (currentElement.equals("surname")) {
+            patient.setSurname(text(ch, start, length));
+        }
+        if (currentElement.equals("city")) {
+            patient.setCity(text(ch, start, length));
+        }
+        if (currentElement.equals("street")) {
+            patient.setStreet(text(ch, start, length));
+        }
+        if (currentElement.equals("buildingNumber")) {
+            patient.setBuildingNumber(text(ch, start, length));
         }
         if (currentElement.equals("birthDate")) {
             patient.setBirthDate(getDate(text(ch, start, length)));

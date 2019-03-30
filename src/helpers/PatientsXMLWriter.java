@@ -43,13 +43,25 @@ public class PatientsXMLWriter {
                 Element patientElement = document.createElement("patient");
                 patientsTag.appendChild(patientElement);
 
-                Element fullName = document.createElement("fullName");
-                fullName.appendChild(document.createTextNode(patient.getFullName()));
-                patientElement.appendChild(fullName);
+                Element name = document.createElement("name");
+                name.appendChild(document.createTextNode(patient.getName()));
+                patientElement.appendChild(name);
 
-                Element address = document.createElement("address");
-                address.appendChild(document.createTextNode(patient.getAddress()));
-                patientElement.appendChild(address);
+                Element surname = document.createElement("surname");
+                surname.appendChild(document.createTextNode(patient.getSurname()));
+                patientElement.appendChild(surname);
+
+                Element city = document.createElement("city");
+                city.appendChild(document.createTextNode(patient.getCity()));
+                patientElement.appendChild(city);
+
+                Element street = document.createElement("street");
+                street.appendChild(document.createTextNode(patient.getStreet()));
+                patientElement.appendChild(street);
+
+                Element buildingNumber = document.createElement("buildingNumber");
+                buildingNumber.appendChild(document.createTextNode(patient.getBuildingNumber()));
+                patientElement.appendChild(buildingNumber);
 
                 Element birthDate = document.createElement("birthDate");
                 birthDate.appendChild(document.createTextNode(patient.getBirthDateString()));
