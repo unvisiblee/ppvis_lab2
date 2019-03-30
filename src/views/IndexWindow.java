@@ -12,7 +12,7 @@ public class IndexWindow {
 
     public IndexWindow(AppointmentsController controller) {
         this.controller = controller;
-        mainWindow = new JFrame("Hospital");
+        mainWindow = new JFrame("Appointments");
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainWindow.setLocationRelativeTo(null);
     }
