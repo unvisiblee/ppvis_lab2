@@ -1,6 +1,6 @@
 package helpers;
 
-import models.Patient;
+import models.Appointment;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -29,12 +29,12 @@ public class PatientsXMLReader {
         handler = new PatientsHandler();
     }
 
-    public ArrayList<Patient> readAll() {
+    public ArrayList<Appointment> readAll() {
         try {
             parser.parse(new File(path), handler);
         } catch (SAXException | IOException e) {
             e.printStackTrace();
         }
-        return handler.getPatients();
+        return handler.getAppointments();
     }
 }

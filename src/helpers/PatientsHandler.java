@@ -1,6 +1,6 @@
 package helpers;
 
-import models.Patient;
+import models.Appointment;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -10,61 +10,64 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class PatientsHandler extends DefaultHandler {
-    private ArrayList<Patient> patients;
-    private Patient patient;
+    private ArrayList<Appointment> appointments;
+    private Appointment appointment;
     private String currentElement;
 
-    public ArrayList<Patient> getPatients() {
-        return patients;
+    public ArrayList<Appointment> getAppointments() {
+        return appointments;
     }
 
     @Override
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
-        if (qName.equals("patients")) {
-            patients = new ArrayList<Patient>();
+        if (qName.equals("appointments")) {
+            appointments = new ArrayList<Appointment>();
         }
         currentElement = qName;
     }
 
     @Override
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
-        if (qName.equals("patient")) {
-            patients.add(patient);
+        if (qName.equals("appointment")) {
+            appointments.add(appointment);
         }
         currentElement = "";
     }
 
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
-        if (currentElement.equals("patient")) {
-            patient = new Patient();
+        if (currentElement.equals("appointment")) {
+            appointment = new Appointment();
         }
-        if (currentElement.equals("name")) {
-            patient.setName(text(ch, start, length));
+        if (currentElement.equals("patientName")) {
+            appointment.setPatientName(text(ch, start, length));
         }
-        if (currentElement.equals("surname")) {
-            patient.setSurname(text(ch, start, length));
+        if (currentElement.equals("patientSurname")) {
+            appointment.setPatientSurname(text(ch, start, length));
         }
-        if (currentElement.equals("city")) {
-            patient.setCity(text(ch, start, length));
+        if (currentElement.equals("patientCity")) {
+            appointment.setPatientCity(text(ch, start, length));
         }
-        if (currentElement.equals("street")) {
-            patient.setStreet(text(ch, start, length));
+        if (currentElement.equals("patientStreet")) {
+            appointment.setPatientStreet(text(ch, start, length));
         }
-        if (currentElement.equals("buildingNumber")) {
-            patient.setBuildingNumber(text(ch, start, length));
+        if (currentElement.equals("patientBuildingNumber")) {
+            appointment.setPatientBuildingNumber(text(ch, start, length));
         }
-        if (currentElement.equals("birthDate")) {
-            patient.setBirthDate(getDate(text(ch, start, length)));
+        if (currentElement.equals("patientBirthDate")) {
+            appointment.setPatientBirthDate(getDate(text(ch, start, length)));
         }
-        if (currentElement.equals("doctorFullName")) {
-            patient.setDoctorFullName(text(ch, start, length));
+        if (currentElement.equals("doctorName")) {
+            appointment.setDoctorName(text(ch, start, length));
         }
-        if (currentElement.equals("appointmentDate")) {
-            patient.setAppointmentDate(getDate(text(ch, start, length)));
+        if (currentElement.equals("doctorSurname")) {
+            appointment.setDoctorSurname(text(ch, start, length));
+        }
+        if (currentElement.equals("date")) {
+            appointment.setDate(getDate(text(ch, start, length)));
         }
         if (currentElement.equals("diagnosis")) {
-            patient.setDiagnosis(text(ch, start, length));
+            appointment.setDiagnosis(text(ch, start, length));
         }
     }
 

@@ -12,7 +12,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import models.Patient;
+import models.Appointment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -30,53 +30,57 @@ public class PatientsXMLWriter {
         this("src/database/database.xml");
     }
 
-    public void writeAll(ArrayList<Patient> patients) {
+    public void writeAll(ArrayList<Appointment> appointments) {
         try {
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
             Document document = documentBuilder.parse(new File(path));
             document.getDocumentElement().normalize();
-            Node patientsTag = document.getElementsByTagName("patients").item(0);
-            removeAll(document, Node.ELEMENT_NODE, "patient");
+            Node patientsTag = document.getElementsByTagName("appointments").item(0);
+            removeAll(document, Node.ELEMENT_NODE, "appointment");
 
-            for(Patient patient : patients) {
-                Element patientElement = document.createElement("patient");
+            for(Appointment appointment : appointments) {
+                Element patientElement = document.createElement("appointment");
                 patientsTag.appendChild(patientElement);
 
-                Element name = document.createElement("name");
-                name.appendChild(document.createTextNode(patient.getName()));
+                Element name = document.createElement("patientName");
+                name.appendChild(document.createTextNode(appointment.getPatientName()));
                 patientElement.appendChild(name);
 
-                Element surname = document.createElement("surname");
-                surname.appendChild(document.createTextNode(patient.getSurname()));
+                Element surname = document.createElement("patientSurname");
+                surname.appendChild(document.createTextNode(appointment.getPatientSurname()));
                 patientElement.appendChild(surname);
 
-                Element city = document.createElement("city");
-                city.appendChild(document.createTextNode(patient.getCity()));
+                Element city = document.createElement("patientCity");
+                city.appendChild(document.createTextNode(appointment.getPatientCity()));
                 patientElement.appendChild(city);
 
-                Element street = document.createElement("street");
-                street.appendChild(document.createTextNode(patient.getStreet()));
+                Element street = document.createElement("patientStreet");
+                street.appendChild(document.createTextNode(appointment.getPatientStreet()));
                 patientElement.appendChild(street);
 
-                Element buildingNumber = document.createElement("buildingNumber");
-                buildingNumber.appendChild(document.createTextNode(patient.getBuildingNumber()));
+                Element buildingNumber = document.createElement("patientBuildingNumber");
+                buildingNumber.appendChild(document.createTextNode(appointment.getPatientBuildingNumber()));
                 patientElement.appendChild(buildingNumber);
 
-                Element birthDate = document.createElement("birthDate");
-                birthDate.appendChild(document.createTextNode(patient.getBirthDateString()));
+                Element birthDate = document.createElement("patientBirthDate");
+                birthDate.appendChild(document.createTextNode(appointment.getPatientBirthDateString()));
                 patientElement.appendChild(birthDate);
 
-                Element doctorFullName = document.createElement("doctorFullName");
-                doctorFullName.appendChild(document.createTextNode(patient.getDoctorFullName()));
-                patientElement.appendChild(doctorFullName);
+                Element doctorName = document.createElement("doctorName");
+                doctorName.appendChild(document.createTextNode(appointment.getDoctorName()));
+                patientElement.appendChild(doctorName);
 
-                Element appointmentDate = document.createElement("appointmentDate");
-                appointmentDate.appendChild(document.createTextNode(patient.getAppointmentDateString()));
+                Element doctorSurname = document.createElement("doctorSurname");
+                doctorSurname.appendChild(document.createTextNode(appointment.getDoctorSurname()));
+                patientElement.appendChild(doctorSurname);
+
+                Element appointmentDate = document.createElement("date");
+                appointmentDate.appendChild(document.createTextNode(appointment.getDateString()));
                 patientElement.appendChild(appointmentDate);
 
                 Element diagnosis = document.createElement("diagnosis");
-                diagnosis.appendChild(document.createTextNode(patient.getDiagnosis()));
+                diagnosis.appendChild(document.createTextNode(appointment.getDiagnosis()));
                 patientElement.appendChild(diagnosis);
             }
 
