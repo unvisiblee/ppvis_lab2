@@ -1,16 +1,16 @@
 package views;
 
-import controllers.PatientsController;
+import controllers.AppointmentsController;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class NewWindow {
-    private PatientsController controller;
+    private AppointmentsController controller;
     private JFrame mainWindow;
 
-    public NewWindow(PatientsController controller) {
+    public NewWindow(AppointmentsController controller) {
         this.controller = controller;
         mainWindow = new JFrame("Hospital");
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

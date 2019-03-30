@@ -9,16 +9,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class PatientsXMLReader {
-    private PatientsHandler handler;
+public class AppointmentsXMLReader {
+    private AppointmentsHandler handler;
     private SAXParser parser;
     private String path;
 
-    public PatientsXMLReader() {
+    public AppointmentsXMLReader() {
         this("src/database/database.xml");
     }
 
-    public PatientsXMLReader(String path) {
+    public AppointmentsXMLReader(String path) {
         this.path = path;
         SAXParserFactory factory = SAXParserFactory.newInstance();
         try {
@@ -26,7 +26,7 @@ public class PatientsXMLReader {
         } catch (ParserConfigurationException | SAXException e) {
             e.printStackTrace();
         }
-        handler = new PatientsHandler();
+        handler = new AppointmentsHandler();
     }
 
     public ArrayList<Appointment> readAll() {

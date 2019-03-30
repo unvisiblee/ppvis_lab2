@@ -1,14 +1,14 @@
 package controllers;
 
 import views.IndexWindow;
-import database.PatientsLocalStorage;
+import database.AppointmentsLocalStorage;
 import views.NewWindow;
 
-public class PatientsController {
-    private PatientsLocalStorage patients;
+public class AppointmentsController {
+    private AppointmentsLocalStorage patients;
 
-    public PatientsController() {
-        patients = new PatientsLocalStorage();
+    public AppointmentsController() {
+        patients = new AppointmentsLocalStorage();
         patients.readAllFromFile();
     }
 
@@ -28,12 +28,12 @@ public class PatientsController {
 
     }
 
-    public PatientsLocalStorage getPatients() {
+    public AppointmentsLocalStorage getPatients() {
         return patients;
     }
 
     private void updateLocalStorage(String path) {
-        patients = new PatientsLocalStorage();
+        patients = new AppointmentsLocalStorage();
         patients.readAllFromFile(path);
     }
 }

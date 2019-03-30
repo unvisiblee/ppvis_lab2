@@ -19,14 +19,14 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class PatientsXMLWriter {
+public class AppointmentsXMLWriter {
     private String path;
 
-    public PatientsXMLWriter(String path) {
+    public AppointmentsXMLWriter(String path) {
         this.path = path;
     }
 
-    public PatientsXMLWriter() {
+    public AppointmentsXMLWriter() {
         this("src/database/database.xml");
     }
 
@@ -36,12 +36,12 @@ public class PatientsXMLWriter {
             DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
             Document document = documentBuilder.parse(new File(path));
             document.getDocumentElement().normalize();
-            Node appointmetsTag = document.getElementsByTagName("appointments").item(0);
+            Node appointmentsTag = document.getElementsByTagName("appointments").item(0);
             removeAll(document, Node.ELEMENT_NODE, "appointment");
 
             for(Appointment appointment : appointments) {
                 Element appointmentElement = document.createElement("appointment");
-                appointmetsTag.appendChild(appointmentElement);
+                appointmentsTag.appendChild(appointmentElement);
 
                 Element patientElement = document.createElement("patient");
 

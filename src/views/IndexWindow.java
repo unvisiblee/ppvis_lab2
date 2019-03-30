@@ -4,13 +4,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.*;
 
-import controllers.PatientsController;
+import controllers.AppointmentsController;
 
 public class IndexWindow {
-    private PatientsController controller;
+    private AppointmentsController controller;
     private JFrame mainWindow;
 
-    public IndexWindow(PatientsController controller) {
+    public IndexWindow(AppointmentsController controller) {
         this.controller = controller;
         mainWindow = new JFrame("Hospital");
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

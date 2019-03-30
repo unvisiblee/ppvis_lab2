@@ -1,36 +1,36 @@
 package database;
 
-import helpers.PatientsXMLReader;
-import helpers.PatientsXMLWriter;
+import helpers.AppointmentsXMLReader;
+import helpers.AppointmentsXMLWriter;
 import models.Appointment;
 
 import java.util.ArrayList;
 
-public class PatientsLocalStorage {
+public class AppointmentsLocalStorage {
     private ArrayList<Appointment> appointments;
 
-    public PatientsLocalStorage() {
+    public AppointmentsLocalStorage() {
         appointments = new ArrayList<Appointment>();
     }
 
-    public PatientsLocalStorage(ArrayList<Appointment> appointments) {
+    public AppointmentsLocalStorage(ArrayList<Appointment> appointments) {
         this.appointments = appointments;
     }
 
     public void readAllFromFile(String path) {
-        appointments = new PatientsXMLReader(path).readAll();
+        appointments = new AppointmentsXMLReader(path).readAll();
     }
 
     public void readAllFromFile() {
-        appointments = new PatientsXMLReader().readAll();
+        appointments = new AppointmentsXMLReader().readAll();
     }
 
     public void commitAllToFile(String path) {
-        new PatientsXMLWriter(path).writeAll(appointments);
+        new AppointmentsXMLWriter(path).writeAll(appointments);
     }
 
     public void commitAllToFile() {
-        new PatientsXMLWriter().writeAll(appointments);
+        new AppointmentsXMLWriter().writeAll(appointments);
     }
 
     public ArrayList<Appointment> getAppointments() {

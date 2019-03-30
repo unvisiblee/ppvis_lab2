@@ -1,6 +1,6 @@
 package views;
 
-import database.PatientsLocalStorage;
+import database.AppointmentsLocalStorage;
 import models.Appointment;
 
 import javax.swing.JButton;
@@ -18,7 +18,7 @@ public class TablePartial {
     private JTable table = new JTable();
     private DefaultTableModel tableModel = getModel();
 
-    public TablePartial(PatientsLocalStorage patients) {
+    public TablePartial(AppointmentsLocalStorage patients) {
         JButton nextButton = new JButton(">");
         JButton prevButton = new JButton("<");
         JButton lastPageButton = new JButton("Last");

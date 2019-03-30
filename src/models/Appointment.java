@@ -70,7 +70,6 @@ public class Appointment
         return doctor.getSurname();
     }
 
-
     public Date getDate() {
         return date;
     }
@@ -90,38 +89,6 @@ public class Appointment
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
-    }
-
-    public void setPatientSurname(String surname) {
-        this.patient.setSurname(surname);;
-    }
-
-    public void setPatientName(String name) {
-        this.patient.setName(name);
-    }
-
-    public void setPatientCity(String city) {
-        this.patient.getAddress().setCity(city);
-    }
-
-    public void setPatientStreet(String street) {
-        this.patient.getAddress().setStreet(street);
-    }
-
-    public void setPatientBuildingNumber(String buildingNumber) {
-        this.patient.getAddress().setBuildingNumber(buildingNumber);
-    }
-
-    public void setPatientBirthDate(Date birthDate) {
-        this.patient.setBirthDate(birthDate);
-    }
-
-    public void setDoctorName(String name) {
-        this.doctor.setName(name);
-    }
-
-    public void setDoctorSurname(String surname) {
-        this.doctor.setSurname(surname);
     }
 
     public void setDate(Date date) {

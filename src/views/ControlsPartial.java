@@ -1,17 +1,16 @@
 package views;
 
-import controllers.PatientsController;
+import controllers.AppointmentsController;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
 
 public class ControlsPartial {
-    private PatientsController controller;
+    private AppointmentsController controller;
     private JPanel panel = new JPanel(new GridLayout(15, 1, 0, 10));
 
-    public ControlsPartial(PatientsController controller) {
+    public ControlsPartial(AppointmentsController controller) {
         this.controller = controller;
         JButton addButton = new JButton("Add");
         JButton searchButton = new JButton("Search");

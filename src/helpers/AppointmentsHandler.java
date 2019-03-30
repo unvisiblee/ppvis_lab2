@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class PatientsHandler extends DefaultHandler {
+public class AppointmentsHandler extends DefaultHandler {
     private ArrayList<Appointment> appointments;
     private Appointment appointment;
     private Patient patient;
