@@ -16,6 +16,8 @@ public class ControlsPartial {
         JButton searchButton = new JButton("Search");
         JButton deleteButton = new JButton("Delete");
 
+        panel.setBorder(BorderFactory.createEmptyBorder(0,0,10,10));
+
         addButton.addActionListener(getAddButtonListener());
 
         panel.add(addButton);

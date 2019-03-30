@@ -1,19 +1,24 @@
 package controllers;
 
+import models.Appointment;
 import views.IndexWindow;
 import database.AppointmentsLocalStorage;
 import views.NewWindow;
 
+import java.util.HashMap;
+
 public class AppointmentsController {
-    private AppointmentsLocalStorage patients;
+    private AppointmentsLocalStorage appointments;
+    private IndexWindow indexWindow;
 
     public AppointmentsController() {
-        patients = new AppointmentsLocalStorage();
-        patients.readAllFromFile();
+        appointments = new AppointmentsLocalStorage();
+        appointments.readAllFromFile();
     }
 
     public void index() {
-        new IndexWindow(this).show();
+        indexWindow = new IndexWindow(this);
+        indexWindow.show();
     }
 
     public void newRecord() {
@@ -24,16 +29,18 @@ public class AppointmentsController {
 //        new ShowWindow(this).show();
     }
 
-    public void create() {
-
+    public void create(HashMap<String, String> params) {
+        Appointment newRecord = new Appointment(params);
+        appointments.addAppointment(newRecord);
+        indexWindow.updateTable();
     }
 
-    public AppointmentsLocalStorage getPatients() {
-        return patients;
+    public AppointmentsLocalStorage getAppointments() {
+        return appointments;
     }
 
     private void updateLocalStorage(String path) {
-        patients = new AppointmentsLocalStorage();
-        patients.readAllFromFile(path);
+        appointments = new AppointmentsLocalStorage();
+        appointments.readAllFromFile(path);
     }
 }

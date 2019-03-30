@@ -40,4 +40,8 @@ public class AppointmentsLocalStorage {
     public void setAppointments(ArrayList<Appointment> appointments) {
         this.appointments = appointments;
     }
+
+    public void addAppointment(Appointment appointment) {
+        appointments.add(appointment);
+    }
 }

@@ -1,10 +1,13 @@
 package models;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 public class Appointment
 {
+    private static final SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
     private Patient patient;
     private Doctor doctor;
     private Date date;
@@ -19,6 +22,24 @@ public class Appointment
         this.doctor = doctor;
         this.date = date;
         this.diagnosis = diagnosis;
+    }
+
+    public Appointment(HashMap<String, String> attributes) {
+        this.date = null;
+        Date patientBirthDate = null;
+        try {
+            this.date = format.parse(attributes.get("date"));
+            patientBirthDate = format.parse(attributes.get("patientBirthDate"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Address address = new Address(attributes.get("patientCity"), attributes.get("patientStreet"),
+                attributes.get("patientBuildingNumber"));
+
+        this.patient = new Patient(attributes.get("patientName"), attributes.get("patientSurname"), patientBirthDate, address);
+        this.doctor = new Doctor(attributes.get("doctorName"), attributes.get("doctorSurname"));
+        this.diagnosis = attributes.get("diagnosis");
     }
 
     public String getPatientFullName() {
@@ -54,7 +75,6 @@ public class Appointment
     }
 
     public String getPatientBirthDateString() {
-        SimpleDateFormat format = new SimpleDateFormat("dd.mm.yyyy");
         return format.format(getPatientBirthDate());
     }
 
@@ -75,7 +95,6 @@ public class Appointment
     }
 
     public String getDateString() {
-        SimpleDateFormat format = new SimpleDateFormat("dd.mm.yyyy");
         return format.format(getDate());
     }
 

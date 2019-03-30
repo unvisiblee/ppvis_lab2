@@ -19,7 +19,6 @@ public class AppointmentsHandler extends DefaultHandler {
     private Address address;
     private Doctor doctor;
     private String currentElement;
-    private boolean isAppointment;
     private boolean isPatient;
     private boolean isAddress;
     private boolean isDoctor;
@@ -36,7 +35,6 @@ public class AppointmentsHandler extends DefaultHandler {
         }
         if (qName.equals("appointment")) {
             appointment = new Appointment();
-            isAppointment = true;
         }
         if (qName.equals("patient")) {
             patient = new Patient();
@@ -57,7 +55,6 @@ public class AppointmentsHandler extends DefaultHandler {
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
         if (qName.equals("appointment")) {
             appointments.add(appointment);
-            isAppointment = false;
         }
         if (qName.equals("patient")) {
             appointment.setPatient(patient);
@@ -113,7 +110,7 @@ public class AppointmentsHandler extends DefaultHandler {
     }
 
     private Date getDate(String dateString) {
-        SimpleDateFormat format = new SimpleDateFormat("dd.mm.yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         Date date = null;
         try {
             date = format.parse(dateString);

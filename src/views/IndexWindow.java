@@ -1,7 +1,6 @@
 package views;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.*;
 
 import controllers.AppointmentsController;
@@ -9,6 +8,7 @@ import controllers.AppointmentsController;
 public class IndexWindow {
     private AppointmentsController controller;
     private JFrame mainWindow;
+    private TablePartial table;
 
     public IndexWindow(AppointmentsController controller) {
         this.controller = controller;
@@ -20,12 +20,22 @@ public class IndexWindow {
     public void show() {
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new BorderLayout());
-        mainWindow.setContentPane(contentPane);
+        contentPane.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
-        contentPane.add(new TablePartial(controller.getPatients()).getPanel(), BorderLayout.CENTER);
+        table = new TablePartial(controller.getAppointments());
+        contentPane.add(table.getPanel(), BorderLayout.CENTER);
         contentPane.add(new ControlsPartial(controller).getPanel(), BorderLayout.WEST);
 
+        mainWindow.setContentPane(contentPane);
         mainWindow.pack();
         mainWindow.setVisible(true);
+    }
+
+    public void dispose() {
+        mainWindow.dispose();
+    }
+
+    public void updateTable() {
+        table.setData(controller.getAppointments().getAppointments());
     }
 }
