@@ -2,6 +2,7 @@ package controllers;
 
 import views.IndexWindow;
 import database.PatientsLocalStorage;
+import views.NewWindow;
 
 public class PatientsController {
     private PatientsLocalStorage patients;
@@ -13,6 +14,19 @@ public class PatientsController {
 
     public void index() {
         new IndexWindow(this).show();
+    }
+
+    public void newRecord() {
+        new NewWindow(this).show();
+        patients.commitAllToFile();
+    }
+
+    public void show() {
+//        new ShowWindow(this).show();
+    }
+
+    public void create() {
+
     }
 
     public PatientsLocalStorage getPatients() {

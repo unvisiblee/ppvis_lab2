@@ -23,7 +23,7 @@ public class IndexWindow {
         mainWindow.setContentPane(contentPane);
 
         contentPane.add(new TablePartial(controller.getPatients()).getPanel(), BorderLayout.CENTER);
-        contentPane.add(new ControlsPartial().getPanel(), BorderLayout.WEST);
+        contentPane.add(new ControlsPartial(controller).getPanel(), BorderLayout.WEST);
 
         mainWindow.pack();
         mainWindow.setVisible(true);
