@@ -36,52 +36,64 @@ public class PatientsXMLWriter {
             DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
             Document document = documentBuilder.parse(new File(path));
             document.getDocumentElement().normalize();
-            Node patientsTag = document.getElementsByTagName("appointments").item(0);
+            Node appointmetsTag = document.getElementsByTagName("appointments").item(0);
             removeAll(document, Node.ELEMENT_NODE, "appointment");
 
             for(Appointment appointment : appointments) {
-                Element patientElement = document.createElement("appointment");
-                patientsTag.appendChild(patientElement);
+                Element appointmentElement = document.createElement("appointment");
+                appointmetsTag.appendChild(appointmentElement);
 
-                Element name = document.createElement("patientName");
-                name.appendChild(document.createTextNode(appointment.getPatientName()));
-                patientElement.appendChild(name);
+                Element patientElement = document.createElement("patient");
 
-                Element surname = document.createElement("patientSurname");
-                surname.appendChild(document.createTextNode(appointment.getPatientSurname()));
-                patientElement.appendChild(surname);
+                Element patientName = document.createElement("name");
+                patientName.appendChild(document.createTextNode(appointment.getPatientName()));
+                patientElement.appendChild(patientName);
 
-                Element city = document.createElement("patientCity");
-                city.appendChild(document.createTextNode(appointment.getPatientCity()));
-                patientElement.appendChild(city);
+                Element patientSurname = document.createElement("surname");
+                patientSurname.appendChild(document.createTextNode(appointment.getPatientSurname()));
+                patientElement.appendChild(patientSurname);
 
-                Element street = document.createElement("patientStreet");
-                street.appendChild(document.createTextNode(appointment.getPatientStreet()));
-                patientElement.appendChild(street);
+                Element patientBirthDate = document.createElement("birthDate");
+                patientBirthDate.appendChild(document.createTextNode(appointment.getPatientBirthDateString()));
+                patientElement.appendChild(patientBirthDate);
 
-                Element buildingNumber = document.createElement("patientBuildingNumber");
-                buildingNumber.appendChild(document.createTextNode(appointment.getPatientBuildingNumber()));
-                patientElement.appendChild(buildingNumber);
+                Element addressElement = document.createElement("address");
 
-                Element birthDate = document.createElement("patientBirthDate");
-                birthDate.appendChild(document.createTextNode(appointment.getPatientBirthDateString()));
-                patientElement.appendChild(birthDate);
+                Element addressCity = document.createElement("city");
+                addressCity.appendChild(document.createTextNode(appointment.getPatientCity()));
+                addressElement.appendChild(addressCity);
 
-                Element doctorName = document.createElement("doctorName");
+                Element addressStreet = document.createElement("street");
+                addressStreet.appendChild(document.createTextNode(appointment.getPatientStreet()));
+                addressElement.appendChild(addressStreet);
+
+                Element addressBuildingNumber = document.createElement("buildingNumber");
+                addressBuildingNumber.appendChild(document.createTextNode(appointment.getPatientBuildingNumber()));
+                addressElement.appendChild(addressBuildingNumber);
+
+                patientElement.appendChild(addressElement);
+
+                appointmentElement.appendChild(patientElement);
+
+                Element doctorElement = document.createElement("doctor");
+
+                Element doctorName = document.createElement("name");
                 doctorName.appendChild(document.createTextNode(appointment.getDoctorName()));
-                patientElement.appendChild(doctorName);
+                doctorElement.appendChild(doctorName);
 
-                Element doctorSurname = document.createElement("doctorSurname");
+                Element doctorSurname = document.createElement("surname");
                 doctorSurname.appendChild(document.createTextNode(appointment.getDoctorSurname()));
-                patientElement.appendChild(doctorSurname);
+                doctorElement.appendChild(doctorSurname);
+
+                appointmentElement.appendChild(doctorElement);
 
                 Element appointmentDate = document.createElement("date");
                 appointmentDate.appendChild(document.createTextNode(appointment.getDateString()));
-                patientElement.appendChild(appointmentDate);
+                appointmentElement.appendChild(appointmentDate);
 
                 Element diagnosis = document.createElement("diagnosis");
                 diagnosis.appendChild(document.createTextNode(appointment.getDiagnosis()));
-                patientElement.appendChild(diagnosis);
+                appointmentElement.appendChild(diagnosis);
             }
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();

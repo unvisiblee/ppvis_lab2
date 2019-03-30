@@ -18,7 +18,6 @@ public class PatientsController {
 
     public void newRecord() {
         new NewWindow(this).show();
-        patients.commitAllToFile();
     }
 
     public void show() {

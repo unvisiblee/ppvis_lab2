@@ -1,6 +1,9 @@
 package helpers;
 
+import models.Address;
 import models.Appointment;
+import models.Doctor;
+import models.Patient;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -12,7 +15,15 @@ import java.util.Date;
 public class PatientsHandler extends DefaultHandler {
     private ArrayList<Appointment> appointments;
     private Appointment appointment;
+    private Patient patient;
+    private Address address;
+    private Doctor doctor;
     private String currentElement;
+    private boolean isAppointment;
+    private boolean isPatient;
+    private boolean isAddress;
+    private boolean isDoctor;
+
 
     public ArrayList<Appointment> getAppointments() {
         return appointments;
@@ -23,6 +34,22 @@ public class PatientsHandler extends DefaultHandler {
         if (qName.equals("appointments")) {
             appointments = new ArrayList<Appointment>();
         }
+        if (qName.equals("appointment")) {
+            appointment = new Appointment();
+            isAppointment = true;
+        }
+        if (qName.equals("patient")) {
+            patient = new Patient();
+            isPatient = true;
+        }
+        if (qName.equals("address")) {
+            address = new Address();
+            isAddress = true;
+        }
+        if (qName.equals("doctor")) {
+            doctor = new Doctor();
+            isDoctor = true;
+        }
         currentElement = qName;
     }
 
@@ -30,38 +57,48 @@ public class PatientsHandler extends DefaultHandler {
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
         if (qName.equals("appointment")) {
             appointments.add(appointment);
+            isAppointment = false;
+        }
+        if (qName.equals("patient")) {
+            appointment.setPatient(patient);
+            isPatient = false;
+        }
+        if (qName.equals("address")) {
+            patient.setAddress(address);
+            isAddress = false;
+        }
+        if (qName.equals("doctor")) {
+            appointment.setDoctor(doctor);
+            isDoctor = false;
         }
         currentElement = "";
     }
 
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
-        if (currentElement.equals("appointment")) {
-            appointment = new Appointment();
+        if (currentElement.equals("name") && isPatient) {
+            patient.setName(text(ch, start, length));
         }
-        if (currentElement.equals("patientName")) {
-            appointment.setPatientName(text(ch, start, length));
+        if (currentElement.equals("surname") && isPatient) {
+            patient.setSurname(text(ch, start, length));
         }
-        if (currentElement.equals("patientSurname")) {
-            appointment.setPatientSurname(text(ch, start, length));
+        if (currentElement.equals("city") && isAddress) {
+            address.setCity(text(ch, start, length));
         }
-        if (currentElement.equals("patientCity")) {
-            appointment.setPatientCity(text(ch, start, length));
+        if (currentElement.equals("street") && isAddress) {
+            address.setStreet(text(ch, start, length));
         }
-        if (currentElement.equals("patientStreet")) {
-            appointment.setPatientStreet(text(ch, start, length));
+        if (currentElement.equals("buildingNumber") && isAddress) {
+            address.setBuildingNumber(text(ch, start, length));
         }
-        if (currentElement.equals("patientBuildingNumber")) {
-            appointment.setPatientBuildingNumber(text(ch, start, length));
+        if (currentElement.equals("birthDate") && isPatient) {
+            patient.setBirthDate(getDate(text(ch, start, length)));
         }
-        if (currentElement.equals("patientBirthDate")) {
-            appointment.setPatientBirthDate(getDate(text(ch, start, length)));
+        if (currentElement.equals("name") && isDoctor) {
+            doctor.setName(text(ch, start, length));
         }
-        if (currentElement.equals("doctorName")) {
-            appointment.setDoctorName(text(ch, start, length));
-        }
-        if (currentElement.equals("doctorSurname")) {
-            appointment.setDoctorSurname(text(ch, start, length));
+        if (currentElement.equals("surname") && isDoctor) {
+            doctor.setSurname(text(ch, start, length));
         }
         if (currentElement.equals("date")) {
             appointment.setDate(getDate(text(ch, start, length)));

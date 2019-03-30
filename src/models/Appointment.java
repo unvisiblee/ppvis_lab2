@@ -84,6 +84,14 @@ public class Appointment
         return diagnosis;
     }
 
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
     public void setPatientSurname(String surname) {
         this.patient.setSurname(surname);;
     }
