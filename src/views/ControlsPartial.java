@@ -40,6 +40,6 @@ public class ControlsPartial {
     }
 
     private ActionListener getDeleteButtonListener() {
-        return e -> controller.newRecord();
+        return e -> controller.delete();
     }
 }

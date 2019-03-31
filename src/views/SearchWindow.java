@@ -55,7 +55,7 @@ public class SearchWindow {
     }
 
     private ActionListener getCloseButtonListener() {
-        return e -> { searchWindow.dispose(); };
+        return e -> dispose();
     }
 
     private ActionListener getSearchButtonListener(AppointmentFormPartial form) {

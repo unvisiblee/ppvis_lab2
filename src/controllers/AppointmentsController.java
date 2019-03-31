@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Appointment;
+import views.DeleteWindow;
 import views.IndexWindow;
 import database.AppointmentsLocalStorage;
 import views.NewWindow;
@@ -33,8 +34,8 @@ public class AppointmentsController {
         searchWindow.show();
     }
 
-    public void remove() {
-
+    public void delete() {
+        new DeleteWindow(this).show();
     }
 
     public void create(HashMap<String, String> params) {
@@ -48,8 +49,12 @@ public class AppointmentsController {
         searchWindow.updateTable(searchResults);
     }
 
-    public void delete() {
-
+    public void remove(HashMap<String, String> params) {
+        ArrayList<Appointment> searchResults = appointments.applyFilters(params);
+        ArrayList<Appointment> appointments = this.appointments.getRecords();
+        appointments.removeAll(searchResults);
+        this.appointments.setRecords(appointments);
+        indexWindow.updateTable();
     }
 
     public void open(File file) {

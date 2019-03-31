@@ -2,20 +2,21 @@ package views;
 
 import controllers.AppointmentsController;
 
+import javax.swing.*;
+
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
-import javax.swing.*;
 
-public class NewWindow {
+public class DeleteWindow {
     private AppointmentsController controller;
-    private JFrame newWindow;
+    private JFrame deleteWindow;
 
-    public NewWindow(AppointmentsController controller) {
+    public DeleteWindow(AppointmentsController controller) {
         this.controller = controller;
-        newWindow = new JFrame("New appointment");
-        newWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        newWindow.setLocationRelativeTo(null);
+        deleteWindow = new JFrame("New appointment");
+        deleteWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        deleteWindow.setLocationRelativeTo(null);
 
         JPanel contentPane = new JPanel();
         contentPane.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
@@ -24,24 +25,24 @@ public class NewWindow {
         JPanel panel = form.getPanel();
 
         JButton closeButton = new JButton("Close");
-        JButton submitButton = new JButton("Submit");
+        JButton deleteButton = new JButton("Delete");
         closeButton.addActionListener(getCloseButtonListener());
-        submitButton.addActionListener(getSubmitButtonListener(form));
+        deleteButton.addActionListener(getSubmitButtonListener(form));
         panel.add(closeButton);
-        panel.add(submitButton);
+        panel.add(deleteButton);
 
         contentPane.add(panel);
 
-        newWindow.setContentPane(contentPane);
-        newWindow.pack();
+        deleteWindow.setContentPane(contentPane);
+        deleteWindow.pack();
     }
 
     public void show() {
-        newWindow.setVisible(true);
+        deleteWindow.setVisible(true);
     }
 
     public void dispose() {
-        newWindow.dispose();
+        deleteWindow.dispose();
     }
 
     private ActionListener getCloseButtonListener() {
@@ -61,7 +62,7 @@ public class NewWindow {
             params.put("doctorSurname", form.getDoctorSurname());
             params.put("date", form.getDate());
             params.put("diagnosis", form.getDiagnosis());
-            controller.create(params);
+            controller.remove(params);
         };
     }
 }
