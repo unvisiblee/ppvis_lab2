@@ -28,14 +28,21 @@ public class Appointment
         this.date = null;
         Date patientBirthDate = null;
         try {
-            this.date = DATE_FORMAT.parse(attributes.get("date"));
-            patientBirthDate = DATE_FORMAT.parse(attributes.get("patientBirthDate"));
+            if (attributes.get("date").isEmpty()) {
+                this.date = null;
+            } else {
+                this.date = DATE_FORMAT.parse(attributes.get("date"));
+            }
+            if (attributes.get("patientBirthDate").isEmpty()) {
+                patientBirthDate = null;
+            } else {
+                patientBirthDate = DATE_FORMAT.parse(attributes.get("patientBirthDate"));
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        Address address = new Address(attributes.get("patientCity"), attributes.get("patientStreet"),
-                attributes.get("patientBuildingNumber"));
+        Address address = new Address(attributes.get("patientCity"), attributes.get("patientStreet"), attributes.get("patientBuildingNumber"));
 
         this.patient = new Patient(attributes.get("patientName"), attributes.get("patientSurname"), patientBirthDate, address);
         this.doctor = new Doctor(attributes.get("doctorName"), attributes.get("doctorSurname"));

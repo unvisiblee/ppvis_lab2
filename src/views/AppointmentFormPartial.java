@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AppointmentFormPartial {
     private static final DateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy");
@@ -96,7 +97,11 @@ public class AppointmentFormPartial {
     }
 
     public String getPatientBirthDate() {
-        return FORMAT.format(patientBirthDateField.getModel().getValue());
+        Date date = (Date) patientBirthDateField.getModel().getValue();
+        if (date == null) {
+            return "";
+        }
+        return FORMAT.format(date);
     }
 
     public String getDoctorName() {
@@ -108,7 +113,11 @@ public class AppointmentFormPartial {
     }
 
     public String getDate() {
-        return FORMAT.format(dateField.getModel().getValue());
+        Date date = (Date) dateField.getModel().getValue();
+        if (date == null) {
+            return "";
+        }
+        return FORMAT.format(date);
     }
 
     public String getDiagnosis() {

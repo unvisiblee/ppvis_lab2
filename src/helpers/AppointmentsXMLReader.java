@@ -2,6 +2,8 @@ package helpers;
 
 import models.Appointment;
 import org.xml.sax.SAXException;
+import views.Alert;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -20,6 +22,7 @@ public class AppointmentsXMLReader {
         try {
             parser = factory.newSAXParser();
         } catch (ParserConfigurationException | SAXException e) {
+            new Alert("Cannot open file.\nInsure it's in right format and you have read permissions.");
             e.printStackTrace();
         }
         handler = new AppointmentsHandler();
@@ -29,6 +32,7 @@ public class AppointmentsXMLReader {
         try {
             parser.parse(file, handler);
         } catch (SAXException | IOException e) {
+            new Alert("Cannot open file.\nInsure it's in right format and you have read permissions.");
             e.printStackTrace();
         }
         return handler.getAppointments();

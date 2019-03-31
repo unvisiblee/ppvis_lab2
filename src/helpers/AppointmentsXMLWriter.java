@@ -20,6 +20,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import views.Alert;
 
 public class AppointmentsXMLWriter {
     private File file;
@@ -34,6 +35,7 @@ public class AppointmentsXMLWriter {
                 fileWriter.write(DEFAULT_STRUCTURE);
                 fileWriter.close();
             } catch (IOException e) {
+                new Alert("Cannot write to file.\nInsure it's in right format and you have write permissions.");
                 e.printStackTrace();
             }
         }
@@ -114,6 +116,7 @@ public class AppointmentsXMLWriter {
             StreamResult streamResult = new StreamResult(file);
             transformer.transform(domSource, streamResult);
         } catch (ParserConfigurationException | IOException | SAXException | TransformerException e) {
+            new Alert("Cannot write to file.\nInsure it's in right format and you have write permissions.");
             e.printStackTrace();
         }
     }
