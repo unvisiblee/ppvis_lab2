@@ -1,21 +1,23 @@
 package views;
 
+import controllers.AppointmentsController;
+
 import javax.swing.*;
 import java.awt.*;
 
-import controllers.AppointmentsController;
-
-public class IndexWindow {
+public class SearchWindow {
     private AppointmentsController controller;
     private JFrame mainWindow;
     private TablePartial table;
 
-    public IndexWindow(AppointmentsController controller) {
+    public SearchWindow(AppointmentsController controller) {
         this.controller = controller;
-        mainWindow = new JFrame("Appointments");
-        mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainWindow = new JFrame("Search");
+        mainWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         mainWindow.setLocationRelativeTo(null);
+    }
 
+    public void show() {
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new BorderLayout());
         contentPane.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
@@ -26,9 +28,6 @@ public class IndexWindow {
 
         mainWindow.setContentPane(contentPane);
         mainWindow.pack();
-    }
-
-    public void show() {
         mainWindow.setVisible(true);
     }
 

@@ -4,6 +4,7 @@ import models.Appointment;
 import views.IndexWindow;
 import database.AppointmentsLocalStorage;
 import views.NewWindow;
+import views.SearchWindow;
 
 import java.util.HashMap;
 
@@ -25,8 +26,8 @@ public class AppointmentsController {
         new NewWindow(this).show();
     }
 
-    public void show() {
-//        new ShowWindow(this).show();
+    public void search() {
+        new SearchWindow(this).show();
     }
 
     public void create(HashMap<String, String> params) {

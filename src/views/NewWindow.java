@@ -78,12 +78,11 @@ public class NewWindow {
         closeButton.addActionListener(getCloseButtonListener());
         submitButton.addActionListener(getSubmitButtonListener());
 
-
         newWindow.setContentPane(contentPane);
+        newWindow.pack();
     }
 
     public void show() {
-        newWindow.pack();
         newWindow.setVisible(true);
     }
 
