@@ -1,10 +1,17 @@
 package views;
 
 import controllers.AppointmentsController;
+import helpers.DatePickerLabelFormatter;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.Properties;
 import javax.swing.*;
 
 public class NewWindow {
@@ -15,10 +22,10 @@ public class NewWindow {
     private JTextField patientCityField;
     private JTextField patientStreetField;
     private JTextField patientBuildingNumberField;
-    private JTextField patientBirthDateField;
+    private JDatePickerImpl patientBirthDateField;
     private JTextField doctorNameField;
     private JTextField doctorSurnameField;
-    private JTextField dateField;
+    private JDatePickerImpl dateField;
     private JTextField diagnosisField;
 
     public NewWindow(AppointmentsController controller) {
@@ -47,10 +54,10 @@ public class NewWindow {
         patientCityField = new JTextField(20);
         patientStreetField = new JTextField(20);
         patientBuildingNumberField = new JTextField(20);
-        patientBirthDateField = new JTextField(20);
+        patientBirthDateField = new DatePickerPartial().getDatePicker();
         doctorNameField = new JTextField(20);
         doctorSurnameField = new JTextField(20);
-        dateField = new JTextField(20);
+        dateField = new DatePickerPartial().getDatePicker();
         diagnosisField = new JTextField(20);
 
         contentPane.add(patientNameLabel);
@@ -96,16 +103,17 @@ public class NewWindow {
 
     private ActionListener getSubmitButtonListener() {
         return e -> {
+            DateFormat format = new SimpleDateFormat("yyyy.MM.dd");
             HashMap<String, String> params = new HashMap<String, String>();
             params.put("patientName", patientNameField.getText());
             params.put("patientSurname", patientSurnameField.getText());
             params.put("patientCity", patientCityField.getText());
             params.put("patientStreet", patientStreetField.getText());
             params.put("patientBuildingNumber", patientBuildingNumberField.getText());
-            params.put("patientBirthDate", patientBirthDateField.getText());
+            params.put("patientBirthDate", format.format(patientBirthDateField.getModel().getValue()));
             params.put("doctorName", doctorNameField.getText());
             params.put("doctorSurname", doctorSurnameField.getText());
-            params.put("date", dateField.getText());
+            params.put("date", format.format(dateField.getModel().getValue()));
             params.put("diagnosis", diagnosisField.getText());
             controller.create(params);
         };
