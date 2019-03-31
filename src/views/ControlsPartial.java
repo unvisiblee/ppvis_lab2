@@ -2,9 +2,10 @@ package views;
 
 import controllers.AppointmentsController;
 
-import java.awt.event.ActionListener;
-import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
 
 public class ControlsPartial {
     private AppointmentsController controller;

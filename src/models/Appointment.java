@@ -2,6 +2,7 @@ package models;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import java.util.HashMap;
 
@@ -28,14 +29,10 @@ public class Appointment
         this.date = null;
         Date patientBirthDate = null;
         try {
-            if (attributes.get("date").isEmpty()) {
-                this.date = null;
-            } else {
+            if (!attributes.get("date").isEmpty()) {
                 this.date = DATE_FORMAT.parse(attributes.get("date"));
             }
-            if (attributes.get("patientBirthDate").isEmpty()) {
-                patientBirthDate = null;
-            } else {
+            if (!attributes.get("patientBirthDate").isEmpty()) {
                 patientBirthDate = DATE_FORMAT.parse(attributes.get("patientBirthDate"));
             }
         } catch (ParseException e) {
@@ -82,6 +79,9 @@ public class Appointment
     }
 
     public String getPatientBirthDateString() {
+        if (getPatientBirthDate() == null) {
+            return "";
+        }
         return DATE_FORMAT.format(getPatientBirthDate());
     }
 
@@ -102,6 +102,9 @@ public class Appointment
     }
 
     public String getDateString() {
+        if (getDate() == null) {
+            return "";
+        }
         return DATE_FORMAT.format(getDate());
     }
 

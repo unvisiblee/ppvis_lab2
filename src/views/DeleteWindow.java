@@ -14,7 +14,7 @@ public class DeleteWindow {
 
     public DeleteWindow(AppointmentsController controller) {
         this.controller = controller;
-        deleteWindow = new JFrame("New appointment");
+        deleteWindow = new JFrame("Delete");
         deleteWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         deleteWindow.setLocationRelativeTo(null);
 

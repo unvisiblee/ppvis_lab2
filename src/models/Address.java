@@ -16,6 +16,9 @@ public class Address {
     }
 
     public String getFullAddress() {
+        if (city.isEmpty()) {
+            return street + " " + buildingNumber;
+        }
         return city + ", " + street + " " + buildingNumber;
     }
 
