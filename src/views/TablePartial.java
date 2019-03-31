@@ -9,13 +9,14 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class TablePartial {
     private JPanel panel = new JPanel(new BorderLayout());
     private DefaultTableModel tableModel = getModel();
+    private JLabel currentPageLabel;
     private JTextField updatePerPageField;
-    private JTable table;
     private ArrayList<Appointment> appointments;
     private int page = 1;
     private int perPage = 30;
@@ -23,11 +24,15 @@ public class TablePartial {
     public TablePartial(AppointmentsLocalStorage appointments) {
         this.appointments = appointments.getAppointments();
         JButton nextButton = new JButton(">");
+        nextButton.addActionListener(getNextButtonListener(this));
         JButton prevButton = new JButton("<");
+        prevButton.addActionListener(getPrevButtonListener(this));
         JButton lastPageButton = new JButton("Last");
+        lastPageButton.addActionListener(getLastPageButtonListener(this));
         JButton firstPageButton = new JButton("First");
+        firstPageButton.addActionListener(getFirstPageButtonListener(this));
 
-        table = new JTable();
+        JTable table = new JTable();
         JScrollPane scrollPane = new JScrollPane(table);
         String[] columnNames = { "Full name", "Address", "Birth date", "Doctor's full name", "Appointment date", "Diagnosis" };
         tableModel.setColumnIdentifiers(columnNames);
@@ -36,7 +41,7 @@ public class TablePartial {
         scrollPane.setPreferredSize(new Dimension(1200, 500));
 
         JPanel pageControlPanel = new JPanel();
-        JLabel currentPageLabel = new JLabel(page + "/" + pageCount());
+        currentPageLabel = new JLabel(page + "/" + pageCount());
         JLabel updatePerPageLabel = new JLabel("Per page:");
         updatePerPageField = new JTextField(String.valueOf(perPage), 4);
         pageControlPanel.add(updatePerPageLabel);
@@ -98,10 +103,41 @@ public class TablePartial {
         } else {
             this.perPage = perPage;
         }
+        setData(dataToDisplay(this.page, this.perPage));
     }
 
     public void setPage(int page) {
-        this.page = page;
+        if (page > pageCount()){
+            this.page = pageCount();
+        } else if (page <= 0) {
+            this.page = 1;
+        } else {
+            this.page = page;
+        }
+        setData(dataToDisplay(this.page, this.perPage));
+        currentPageLabel.setText(getPage() + "/" + pageCount());
+    }
+
+    private ActionListener getNextButtonListener(TablePartial table) {
+        return e -> {
+            table.setPage(table.getPage() + 1);
+            currentPageLabel.setText(table.getPage() + "/" + table.pageCount());
+        };
+    }
+
+    private ActionListener getPrevButtonListener(TablePartial table) {
+        return e -> {
+            table.setPage(table.getPage() - 1);
+            currentPageLabel.setText(table.getPage() + "/" + table.pageCount());
+        };
+    }
+
+    private ActionListener getLastPageButtonListener(TablePartial table) {
+        return e -> table.setPage(table.pageCount());
+    }
+
+    private ActionListener getFirstPageButtonListener(TablePartial table) {
+        return e -> table.setPage(1);
     }
 
     private DefaultTableModel getModel() {
@@ -143,6 +179,7 @@ public class TablePartial {
     private ArrayList<Appointment> dataToDisplay(int page, int perPage) {
         int from = (page - 1) * perPage;
         int to = from + perPage;
+        to = to > appointments.size() ? appointments.size() : to;
         return new ArrayList<Appointment>(appointments.subList(from, to));
     }
 }
