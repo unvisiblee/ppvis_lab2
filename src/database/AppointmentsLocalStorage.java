@@ -66,9 +66,6 @@ public class AppointmentsLocalStorage {
     }
 
     private ArrayList<Appointment> applyDiagnosisFilter(ArrayList<Appointment> data, String diagnosis) {
-        if (diagnosis.isEmpty()) {
-            return data;
-        }
         ArrayList<Appointment> results = new ArrayList<Appointment>();
         for(Appointment appointment : data) {
             if (appointment.getDiagnosis().matches(".*" + diagnosis + ".*")) {
@@ -83,9 +80,6 @@ public class AppointmentsLocalStorage {
     }
 
     private ArrayList<Appointment> applyDateFilter(ArrayList<Appointment> data, String date) {
-        if (date.isEmpty()) {
-            return data;
-        }
         ArrayList<Appointment> results = new ArrayList<Appointment>();
         for(Appointment appointment : data) {
             if (appointment.getDateString().matches(".*" + date + ".*")) {
@@ -100,9 +94,6 @@ public class AppointmentsLocalStorage {
     }
 
     private ArrayList<Appointment> applyDoctorSurnameFilter(ArrayList<Appointment> data, String doctorSurname) {
-        if (doctorSurname.isEmpty()) {
-            return data;
-        }
         ArrayList<Appointment> results = new ArrayList<Appointment>();
         for(Appointment appointment : data) {
             if (appointment.getDoctorSurname().matches(".*" + doctorSurname + ".*")) {
@@ -117,9 +108,6 @@ public class AppointmentsLocalStorage {
     }
 
     private ArrayList<Appointment> applyDoctorNameFilter(ArrayList<Appointment> data, String doctorName) {
-        if (doctorName.isEmpty()) {
-            return data;
-        }
         ArrayList<Appointment> results = new ArrayList<Appointment>();
         for(Appointment appointment : data) {
             if (appointment.getDoctorName().matches(".*" + doctorName + ".*")) {
@@ -134,9 +122,6 @@ public class AppointmentsLocalStorage {
     }
 
     private ArrayList<Appointment> applyPatientBirthDateFilter(ArrayList<Appointment> data, String patientBirthDate) {
-        if (patientBirthDate.isEmpty()) {
-            return data;
-        }
         ArrayList<Appointment> results = new ArrayList<Appointment>();
         for(Appointment appointment : data) {
             if (appointment.getPatientBirthDateString().matches(".*" + patientBirthDate + ".*")) {
@@ -151,9 +136,6 @@ public class AppointmentsLocalStorage {
     }
 
     private ArrayList<Appointment> applyPatientBuildingNumberFilter(ArrayList<Appointment> data, String patientBuildingNumber) {
-        if (patientBuildingNumber.isEmpty()) {
-            return data;
-        }
         ArrayList<Appointment> results = new ArrayList<Appointment>();
         for(Appointment appointment : data) {
             if (appointment.getPatientBuildingNumber().matches(".*" + patientBuildingNumber + ".*")) {
@@ -168,9 +150,6 @@ public class AppointmentsLocalStorage {
     }
 
     private ArrayList<Appointment> applyPatientStreetFilter(ArrayList<Appointment> data, String patientStreet) {
-        if (patientStreet.isEmpty()) {
-            return data;
-        }
         ArrayList<Appointment> results = new ArrayList<Appointment>();
         for(Appointment appointment : data) {
             if (appointment.getPatientStreet().matches(".*" + patientStreet + ".*")) {
@@ -185,9 +164,6 @@ public class AppointmentsLocalStorage {
     }
 
     private ArrayList<Appointment> applyPatientCityFilter(ArrayList<Appointment> data, String patientCity) {
-        if (patientCity.isEmpty()) {
-            return data;
-        }
         ArrayList<Appointment> results = new ArrayList<Appointment>();
         for(Appointment appointment : data) {
             if (appointment.getPatientCity().matches(".*" + patientCity + ".*")) {
@@ -202,9 +178,6 @@ public class AppointmentsLocalStorage {
     }
 
     private ArrayList<Appointment> applyPatientSurnameFilter(ArrayList<Appointment> data, String patientSurname) {
-        if (patientSurname.isEmpty()) {
-            return data;
-        }
         ArrayList<Appointment> results = new ArrayList<Appointment>();
         for(Appointment appointment : data) {
             if (appointment.getPatientSurname().matches(".*" + patientSurname + ".*")) {
@@ -219,9 +192,6 @@ public class AppointmentsLocalStorage {
     }
 
     private ArrayList<Appointment> applyPatientNameFilter(ArrayList<Appointment> data, String patientName) {
-        if (patientName.isEmpty()) {
-            return data;
-        }
         ArrayList<Appointment> results = new ArrayList<Appointment>();
         for(Appointment appointment : data) {
             if (appointment.getPatientName().matches(".*" + patientName + ".*")) {
