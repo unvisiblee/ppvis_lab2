@@ -1,41 +1,77 @@
 package views;
 
 import controllers.AppointmentsController;
+import models.Appointment;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SearchWindow {
     private AppointmentsController controller;
-    private JFrame mainWindow;
+    private JFrame searchWindow;
     private TablePartial table;
 
     public SearchWindow(AppointmentsController controller) {
         this.controller = controller;
-        mainWindow = new JFrame("Search");
-        mainWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        mainWindow.setLocationRelativeTo(null);
-    }
+        searchWindow = new JFrame("Search");
+        searchWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        searchWindow.setLocationRelativeTo(null);
 
-    public void show() {
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new BorderLayout());
         contentPane.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
+        AppointmentFormPartial form = new AppointmentFormPartial(controller);
+        JPanel panel = form.getPanel();
+
+        JButton closeButton = new JButton("Close");
+        JButton searchButton = new JButton("Search");
+        closeButton.addActionListener(getCloseButtonListener());
+        searchButton.addActionListener(getSearchButtonListener(form));
+        panel.add(closeButton);
+        panel.add(searchButton);
+
         table = new TablePartial(controller.getAppointments().getRecords());
         contentPane.add(table.getPanel(), BorderLayout.CENTER);
-        contentPane.add(new ControlsPartial(controller).getPanel(), BorderLayout.WEST);
+        contentPane.add(panel, BorderLayout.WEST);
 
-        mainWindow.setContentPane(contentPane);
-        mainWindow.pack();
-        mainWindow.setVisible(true);
+        searchWindow.setContentPane(contentPane);
+        searchWindow.pack();
+    }
+
+    public void show() {
+        searchWindow.setVisible(true);
     }
 
     public void dispose() {
-        mainWindow.dispose();
+        searchWindow.dispose();
     }
 
-    public void updateTable() {
-        table.setData(controller.getAppointments().getRecords());
+    public void updateTable(ArrayList<Appointment> appointments) {
+        table.setData(appointments);
+    }
+
+    private ActionListener getCloseButtonListener() {
+        return e -> { searchWindow.dispose(); };
+    }
+
+    private ActionListener getSearchButtonListener(AppointmentFormPartial form) {
+        return e -> {
+            HashMap<String, String> params = new HashMap<String, String>();
+            params.put("patientName", form.getPatientName());
+            params.put("patientSurname", form.getPatientSurname());
+            params.put("patientCity", form.getPatientCity());
+            params.put("patientStreet", form.getPatientStreet());
+            params.put("patientBuildingNumber", form.getPatientBuildingNumber());
+            params.put("patientBirthDate", form.getPatientBirthDate());
+            params.put("doctorName", form.getDoctorName());
+            params.put("doctorSurname", form.getDoctorSurname());
+            params.put("date", form.getDate());
+            params.put("diagnosis", form.getDiagnosis());
+            controller.select(params);
+        };
     }
 }

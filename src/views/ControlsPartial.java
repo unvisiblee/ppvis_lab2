@@ -19,6 +19,8 @@ public class ControlsPartial {
         panel.setBorder(BorderFactory.createEmptyBorder(0,0,10,10));
 
         addButton.addActionListener(getAddButtonListener());
+        searchButton.addActionListener(getSearchButtonListener());
+        deleteButton.addActionListener(getDeleteButtonListener());
 
         panel.add(addButton);
         panel.add(searchButton);
@@ -30,6 +32,14 @@ public class ControlsPartial {
     }
 
     private ActionListener getAddButtonListener() {
+        return e -> controller.newRecord();
+    }
+
+    private ActionListener getSearchButtonListener() {
+        return e -> controller.search();
+    }
+
+    private ActionListener getDeleteButtonListener() {
         return e -> controller.newRecord();
     }
 }

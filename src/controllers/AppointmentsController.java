@@ -7,11 +7,13 @@ import views.NewWindow;
 import views.SearchWindow;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AppointmentsController {
     private AppointmentsLocalStorage appointments;
     private IndexWindow indexWindow;
+    private SearchWindow searchWindow;
 
     public AppointmentsController() {
         appointments = new AppointmentsLocalStorage();
@@ -27,7 +29,12 @@ public class AppointmentsController {
     }
 
     public void search() {
-        new SearchWindow(this).show();
+        searchWindow = new SearchWindow(this);
+        searchWindow.show();
+    }
+
+    public void remove() {
+
     }
 
     public void create(HashMap<String, String> params) {
@@ -36,8 +43,13 @@ public class AppointmentsController {
         indexWindow.updateTable();
     }
 
-    public AppointmentsLocalStorage getAppointments() {
-        return appointments;
+    public void select(HashMap<String, String> params) {
+        ArrayList<Appointment> searchResults = appointments.applyFilters(params);
+        searchWindow.updateTable(searchResults);
+    }
+
+    public void delete() {
+
     }
 
     public void open(File file) {
@@ -53,5 +65,9 @@ public class AppointmentsController {
 
     public void save() {
         appointments.commitAll();
+    }
+
+    public AppointmentsLocalStorage getAppointments() {
+        return appointments;
     }
 }
