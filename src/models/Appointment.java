@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class Appointment
 {
-    private static final SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
     private Patient patient;
     private Doctor doctor;
     private Date date;
@@ -28,8 +28,8 @@ public class Appointment
         this.date = null;
         Date patientBirthDate = null;
         try {
-            this.date = format.parse(attributes.get("date"));
-            patientBirthDate = format.parse(attributes.get("patientBirthDate"));
+            this.date = DATE_FORMAT.parse(attributes.get("date"));
+            patientBirthDate = DATE_FORMAT.parse(attributes.get("patientBirthDate"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -75,7 +75,7 @@ public class Appointment
     }
 
     public String getPatientBirthDateString() {
-        return format.format(getPatientBirthDate());
+        return DATE_FORMAT.format(getPatientBirthDate());
     }
 
     public String getDoctorFullName() {
@@ -95,7 +95,7 @@ public class Appointment
     }
 
     public String getDateString() {
-        return format.format(getDate());
+        return DATE_FORMAT.format(getDate());
     }
 
     public String getDiagnosis() {

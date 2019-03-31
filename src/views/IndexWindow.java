@@ -20,10 +20,11 @@ public class IndexWindow {
         contentPane.setLayout(new BorderLayout());
         contentPane.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
-        table = new TablePartial(controller.getAppointments().getAppointments());
+        table = new TablePartial(controller.getAppointments().getRecords());
         contentPane.add(table.getPanel(), BorderLayout.CENTER);
         contentPane.add(new ControlsPartial(controller).getPanel(), BorderLayout.WEST);
 
+        mainWindow.setJMenuBar(new MenuPartial(controller).getMenuBar());
         mainWindow.setContentPane(contentPane);
         mainWindow.pack();
     }
@@ -37,6 +38,6 @@ public class IndexWindow {
     }
 
     public void updateTable() {
-        table.setData(controller.getAppointments().getAppointments());
+        table.setData(controller.getAppointments().getRecords());
     }
 }

@@ -12,14 +12,10 @@ import java.util.ArrayList;
 public class AppointmentsXMLReader {
     private AppointmentsHandler handler;
     private SAXParser parser;
-    private String path;
+    private File file;
 
-    public AppointmentsXMLReader() {
-        this("src/database/database.xml");
-    }
-
-    public AppointmentsXMLReader(String path) {
-        this.path = path;
+    public AppointmentsXMLReader(File file) {
+        this.file = file;
         SAXParserFactory factory = SAXParserFactory.newInstance();
         try {
             parser = factory.newSAXParser();
@@ -31,7 +27,7 @@ public class AppointmentsXMLReader {
 
     public ArrayList<Appointment> readAll() {
         try {
-            parser.parse(new File(path), handler);
+            parser.parse(file, handler);
         } catch (SAXException | IOException e) {
             e.printStackTrace();
         }

@@ -6,6 +6,7 @@ import database.AppointmentsLocalStorage;
 import views.NewWindow;
 import views.SearchWindow;
 
+import java.io.File;
 import java.util.HashMap;
 
 public class AppointmentsController {
@@ -14,7 +15,6 @@ public class AppointmentsController {
 
     public AppointmentsController() {
         appointments = new AppointmentsLocalStorage();
-        appointments.readAllFromFile();
     }
 
     public void index() {
@@ -32,7 +32,7 @@ public class AppointmentsController {
 
     public void create(HashMap<String, String> params) {
         Appointment newRecord = new Appointment(params);
-        appointments.addAppointment(newRecord);
+        appointments.addRecord(newRecord);
         indexWindow.updateTable();
     }
 
@@ -40,8 +40,18 @@ public class AppointmentsController {
         return appointments;
     }
 
-    private void updateLocalStorage(String path) {
-        appointments = new AppointmentsLocalStorage();
-        appointments.readAllFromFile(path);
+    public void open(File file) {
+        appointments.setSourceFile(file);
+        appointments.readAll();
+        indexWindow.updateTable();
+    }
+
+    public void save(File file) {
+        appointments.setSourceFile(file);
+        appointments.commitAll();
+    }
+
+    public void save() {
+        appointments.commitAll();
     }
 }

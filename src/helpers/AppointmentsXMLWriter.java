@@ -1,8 +1,8 @@
 package helpers;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -12,7 +12,9 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
 import models.Appointment;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -20,21 +22,29 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class AppointmentsXMLWriter {
-    private String path;
+    private File file;
+    private static final String DEFAULT_STRUCTURE = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
+            "<appointments>\n</appointments>";
 
-    public AppointmentsXMLWriter(String path) {
-        this.path = path;
-    }
-
-    public AppointmentsXMLWriter() {
-        this("src/database/database.xml");
+    public AppointmentsXMLWriter(File file) {
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+                FileWriter fileWriter = new FileWriter(file, true);
+                fileWriter.write(DEFAULT_STRUCTURE);
+                fileWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        this.file = file;
     }
 
     public void writeAll(ArrayList<Appointment> appointments) {
         try {
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
-            Document document = documentBuilder.parse(new File(path));
+            Document document = documentBuilder.parse(file);
             document.getDocumentElement().normalize();
             Node appointmentsTag = document.getElementsByTagName("appointments").item(0);
             removeAll(document, Node.ELEMENT_NODE, "appointment");
@@ -101,7 +111,7 @@ public class AppointmentsXMLWriter {
             transformer.setOutputProperty(OutputKeys.METHOD, "xml");
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             DOMSource domSource = new DOMSource(document);
-            StreamResult streamResult = new StreamResult(new File(path));
+            StreamResult streamResult = new StreamResult(file);
             transformer.transform(domSource, streamResult);
         } catch (ParserConfigurationException | IOException | SAXException | TransformerException e) {
             e.printStackTrace();

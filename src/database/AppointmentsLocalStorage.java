@@ -4,44 +4,48 @@ import helpers.AppointmentsXMLReader;
 import helpers.AppointmentsXMLWriter;
 import models.Appointment;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class AppointmentsLocalStorage {
+    private static final File DEFAULT_SOURCE_FILE = new File("src/database/appointments.xml");
     private ArrayList<Appointment> appointments;
+    private File sourceFile;
+
+    public AppointmentsLocalStorage(File sourceFile) {
+        this.sourceFile = sourceFile;
+        readAll();
+    }
 
     public AppointmentsLocalStorage() {
-        appointments = new ArrayList<Appointment>();
+        this(DEFAULT_SOURCE_FILE);
+}
+
+    public File getSourceFile() {
+        return sourceFile;
     }
 
-    public AppointmentsLocalStorage(ArrayList<Appointment> appointments) {
-        this.appointments = appointments;
+    public void setSourceFile(File sourceFile) {
+        this.sourceFile = sourceFile;
     }
 
-    public void readAllFromFile(String path) {
-        appointments = new AppointmentsXMLReader(path).readAll();
+    public void readAll() {
+        appointments = new AppointmentsXMLReader(sourceFile).readAll();
     }
 
-    public void readAllFromFile() {
-        appointments = new AppointmentsXMLReader().readAll();
+    public void commitAll() {
+        new AppointmentsXMLWriter(sourceFile).writeAll(appointments);
     }
 
-    public void commitAllToFile(String path) {
-        new AppointmentsXMLWriter(path).writeAll(appointments);
-    }
-
-    public void commitAllToFile() {
-        new AppointmentsXMLWriter().writeAll(appointments);
-    }
-
-    public ArrayList<Appointment> getAppointments() {
+    public ArrayList<Appointment> getRecords() {
         return appointments;
     }
 
-    public void setAppointments(ArrayList<Appointment> appointments) {
+    public void setRecords(ArrayList<Appointment> appointments) {
         this.appointments = appointments;
     }
 
-    public void addAppointment(Appointment appointment) {
+    public void addRecord(Appointment appointment) {
         appointments.add(appointment);
     }
 }
