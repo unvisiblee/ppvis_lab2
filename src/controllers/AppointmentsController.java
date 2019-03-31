@@ -1,11 +1,8 @@
 package controllers;
 
 import models.Appointment;
-import views.DeleteWindow;
-import views.IndexWindow;
+import views.*;
 import database.AppointmentsLocalStorage;
-import views.NewWindow;
-import views.SearchWindow;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -54,6 +51,7 @@ public class AppointmentsController {
         ArrayList<Appointment> appointments = this.appointments.getRecords();
         appointments.removeAll(searchResults);
         this.appointments.setRecords(appointments);
+        new Alert(getRemovedRecordsList(searchResults));
         indexWindow.updateTable();
     }
 
@@ -74,5 +72,21 @@ public class AppointmentsController {
 
     public AppointmentsLocalStorage getAppointments() {
         return appointments;
+    }
+
+    private String getRemovedRecordsList(ArrayList<Appointment> removedRecords) {
+        if (removedRecords.size() == 0) {
+            return "No records removed.";
+        }
+        String text = new String(removedRecords.size() + " appointments removed:\n");
+        for (int index = 0; index < removedRecords.size(); index++) {
+            Appointment appointment = removedRecords.get(index);
+            text += appointment.getPatientSurname() + " at the doctor " + appointment.getDoctorSurname() + " " +
+                    appointment.getDateString() + "\n";
+            if (index >= 9) {
+                return text + "And " + (removedRecords.size() - index - 1) + " more.";
+            }
+        }
+        return text;
     }
 }
