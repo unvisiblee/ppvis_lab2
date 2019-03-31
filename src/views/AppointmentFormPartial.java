@@ -9,7 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class AppointmentFormPartial {
-    private static final DateFormat FORMAT = new SimpleDateFormat("yyyy.MM.dd");
+    private static final DateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy");
     private AppointmentsController controller;
     private JPanel panel;
     private JTextField patientNameField;
@@ -96,7 +96,7 @@ public class AppointmentFormPartial {
     }
 
     public String getPatientBirthDate() {
-        return  FORMAT.format(patientBirthDateField.getModel().getValue());
+        return FORMAT.format(patientBirthDateField.getModel().getValue());
     }
 
     public String getDoctorName() {

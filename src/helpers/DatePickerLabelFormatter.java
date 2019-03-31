@@ -6,8 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class DatePickerLabelFormatter extends JFormattedTextField.AbstractFormatter {
-
-    private String pattern = "yyyy.MM.dd";
+    private String pattern = "dd.MM.yyyy";
     private SimpleDateFormat format = new SimpleDateFormat(pattern);
 
     @Override
@@ -16,7 +15,7 @@ public class DatePickerLabelFormatter extends JFormattedTextField.AbstractFormat
     }
 
     @Override
-    public String valueToString(Object value) throws ParseException {
+    public String valueToString(Object value) {
         if (value != null) {
             Calendar calendar = (Calendar) value;
             return format.format(calendar.getTime());
