@@ -28,18 +28,18 @@ public class AppointmentsXMLWriter {
             "<appointments>\n</appointments>";
 
     public AppointmentsXMLWriter(File file) {
-        if (!file.exists()) {
-            try {
+        try {
+            if (!file.exists()) {
                 file.createNewFile();
-                FileWriter fileWriter = new FileWriter(file, true);
-                fileWriter.write(DEFAULT_STRUCTURE);
-                fileWriter.close();
-            } catch (IOException e) {
-                new Alert("Cannot write to file.\nInsure it's in right format and you have write permissions.");
-                e.printStackTrace();
             }
+            FileWriter fileWriter = new FileWriter(file, false);
+            fileWriter.write(DEFAULT_STRUCTURE);
+            fileWriter.close();
+            this.file = file;
+        } catch (IOException e) {
+            new Alert("Cannot write to file.\nInsure it's in right format and you have write permissions.");
+            e.printStackTrace();
         }
-        this.file = file;
     }
 
     public void writeAll(ArrayList<Appointment> appointments) {
