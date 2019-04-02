@@ -10,29 +10,33 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AppointmentsLocalStorage {
-    private static final File DEFAULT_SOURCE_FILE = new File("src/database/appointments.xml");
-    private ArrayList<Appointment> records;
+    private ArrayList<Appointment> records = new ArrayList<Appointment>();
     private File sourceFile;
 
     public AppointmentsLocalStorage(File sourceFile) {
         this.sourceFile = sourceFile;
-        readAll();
     }
 
-    public AppointmentsLocalStorage() {
-        this(DEFAULT_SOURCE_FILE);
-}
+    public AppointmentsLocalStorage() {}
+
+    public boolean isSourceSet() {
+        return (sourceFile != null);
+    }
 
     public File getSourceFile() {
         return sourceFile;
     }
 
-    public void setSourceFile(File sourceFile) {
+    public AppointmentsLocalStorage setSourceFile(File sourceFile) {
         this.sourceFile = sourceFile;
+        return this;
     }
 
     public void readAll() {
         records = new AppointmentsXMLReader(sourceFile).readAll();
+        if (records == null) {
+            records = new ArrayList<Appointment>();
+        }
     }
 
     public void commitAll() {

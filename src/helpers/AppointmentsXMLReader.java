@@ -22,7 +22,7 @@ public class AppointmentsXMLReader {
         try {
             parser = factory.newSAXParser();
         } catch (ParserConfigurationException | SAXException e) {
-            new Alert("Cannot open file.\nInsure it's in right format and you have read permissions.");
+            new Alert("Cannot open file.\nEnsure it's in right format and you have read permissions.");
             e.printStackTrace();
         }
         handler = new AppointmentsHandler();
@@ -32,8 +32,9 @@ public class AppointmentsXMLReader {
         try {
             parser.parse(file, handler);
         } catch (SAXException | IOException e) {
-            new Alert("Cannot open file.\nInsure it's in right format and you have read permissions.");
+            new Alert("Cannot open file.\nEnsure it's in right format and you have read permissions.");
             e.printStackTrace();
+            return null;
         }
         return handler.getAppointments();
     }

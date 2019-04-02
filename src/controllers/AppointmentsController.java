@@ -4,6 +4,7 @@ import models.Appointment;
 import views.*;
 import database.AppointmentsLocalStorage;
 
+import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,7 +68,16 @@ public class AppointmentsController {
     }
 
     public void save() {
-        appointments.commitAll();
+        if (appointments.isSourceSet()) {
+            appointments.commitAll();
+        } else {
+            JFileChooser fileChooser = new JFileChooser();
+            int response = fileChooser.showOpenDialog(null);
+            if (response == JFileChooser.APPROVE_OPTION) {
+                File file = fileChooser.getSelectedFile();;
+                open(file);
+            }
+        }
     }
 
     public AppointmentsLocalStorage getAppointments() {
