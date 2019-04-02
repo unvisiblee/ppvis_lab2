@@ -3,10 +3,8 @@ package views;
 import controllers.AppointmentsController;
 
 import javax.swing.*;
-
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-
 
 public class DeleteWindow {
     private AppointmentsController controller;

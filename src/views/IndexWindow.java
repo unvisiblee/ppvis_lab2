@@ -1,9 +1,9 @@
 package views;
 
+import controllers.AppointmentsController;
+
 import javax.swing.*;
 import java.awt.*;
-
-import controllers.AppointmentsController;
 
 public class IndexWindow {
     private AppointmentsController controller;

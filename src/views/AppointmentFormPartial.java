@@ -1,8 +1,8 @@
 package views;
 
 import controllers.AppointmentsController;
-import org.jdatepicker.impl.JDatePickerImpl;
 
+import org.jdatepicker.impl.JDatePickerImpl;
 import javax.swing.*;
 import java.awt.*;
 import java.text.DateFormat;

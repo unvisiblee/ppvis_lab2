@@ -2,7 +2,6 @@ package database;
 
 import helpers.AppointmentsXMLReader;
 import helpers.AppointmentsXMLWriter;
-
 import models.Appointment;
 
 import java.io.File;
