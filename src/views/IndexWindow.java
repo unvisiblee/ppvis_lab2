@@ -1,18 +1,18 @@
 package views;
 
-import controllers.AppointmentsController;
+import controllers.StudentsController;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class IndexWindow {
-    private AppointmentsController controller;
+    private StudentsController controller;
     private JFrame mainWindow;
     private TablePartial table;
 
-    public IndexWindow(AppointmentsController controller) {
+    public IndexWindow(StudentsController controller) {
         this.controller = controller;
-        mainWindow = new JFrame("Appointments");
+        mainWindow = new JFrame("Students");
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainWindow.setLocationRelativeTo(null);
 
@@ -20,7 +20,7 @@ public class IndexWindow {
         contentPane.setLayout(new BorderLayout());
         contentPane.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
-        table = new TablePartial(controller.getAppointments().getRecords());
+        table = new TablePartial(controller.getStudents().getRecords());
         contentPane.add(table.getPanel(), BorderLayout.CENTER);
         contentPane.add(new ControlsPartial(controller).getPanel(), BorderLayout.WEST);
 
@@ -38,6 +38,6 @@ public class IndexWindow {
     }
 
     public void updateTable() {
-        table.setData(controller.getAppointments().getRecords());
+        table.setData(controller.getStudents().getRecords());
     }
 }

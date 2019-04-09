@@ -1,16 +1,16 @@
 package views;
 
-import controllers.AppointmentsController;
+import controllers.StudentsController;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 public class DeleteWindow {
-    private AppointmentsController controller;
+    private StudentsController controller;
     private JFrame deleteWindow;
 
-    public DeleteWindow(AppointmentsController controller) {
+    public DeleteWindow(StudentsController controller) {
         this.controller = controller;
         deleteWindow = new JFrame("Delete");
         deleteWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -19,7 +19,7 @@ public class DeleteWindow {
         JPanel contentPane = new JPanel();
         contentPane.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
-        AppointmentFormPartial form = new AppointmentFormPartial(controller);
+        StudentFormPartial form = new StudentFormPartial(controller);
         JPanel panel = form.getPanel();
 
         JButton closeButton = new JButton("Close");
@@ -47,19 +47,22 @@ public class DeleteWindow {
         return e -> dispose();
     }
 
-    private ActionListener getSubmitButtonListener(AppointmentFormPartial form) {
+    private ActionListener getSubmitButtonListener(StudentFormPartial form) {
         return e -> {
             HashMap<String, String> params = new HashMap<String, String>();
-            params.put("patientName", form.getPatientName());
-            params.put("patientSurname", form.getPatientSurname());
-            params.put("patientCity", form.getPatientCity());
-            params.put("patientStreet", form.getPatientStreet());
-            params.put("patientBuildingNumber", form.getPatientBuildingNumber());
-            params.put("patientBirthDate", form.getPatientBirthDate());
-            params.put("doctorName", form.getDoctorName());
-            params.put("doctorSurname", form.getDoctorSurname());
-            params.put("date", form.getDate());
-            params.put("diagnosis", form.getDiagnosis());
+            params.put("studentName", form.getStudentName());
+            params.put("studentSurname", form.getStudentSurname());
+            params.put("studentLastName", form.getStudentLastName());
+            params.put("studentSistersCount", form.getStudentSistersCount());
+            params.put("studentBrothersCount", form.getStudentBrothersCount());
+            params.put("motherName", form.getMotherName());
+            params.put("motherSurname", form.getMotherSurname());
+            params.put("motherLastName", form.getMotherLastName());
+            params.put("motherEarnings", form.getMotherEarnings());
+            params.put("fatherName", form.getFatherName());
+            params.put("fatherSurname", form.getFatherSurname());
+            params.put("fatherLastName", form.getFatherLastName());
+            params.put("fatherEarnings", form.getFatherEarnings());
             controller.remove(params);
         };
     }

@@ -1,6 +1,6 @@
 package views;
 
-import controllers.AppointmentsController;
+import controllers.StudentsController;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -9,9 +9,9 @@ import java.io.File;
 
 public class MenuPartial {
     private JMenuBar menuBar;
-    private AppointmentsController controller;
+    private StudentsController controller;
 
-    public MenuPartial(AppointmentsController controller) {
+    public MenuPartial(StudentsController controller) {
         this.controller = controller;
 
         JFileChooser fileChooser = new JFileChooser();

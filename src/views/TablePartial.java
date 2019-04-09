@@ -1,6 +1,6 @@
 package views;
 
-import models.Appointment;
+import models.Student;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -16,20 +16,20 @@ public class TablePartial {
     private DefaultTableModel tableModel = getModel();
     private JLabel currentPageLabel;
     private JTextField updatePerPageField;
-    private ArrayList<Appointment> appointments;
+    private ArrayList<Student> students;
     private int page = 1;
     private int perPage = 30;
 
     public TablePartial() {
-        this(new ArrayList<Appointment>());
+        this(new ArrayList<Student>());
     }
 
-    public TablePartial(ArrayList<Appointment> appointments) {
-        this.appointments = appointments;
+    public TablePartial(ArrayList<Student> students) {
+        this.students = students;
 
         JTable table = new JTable();
         JScrollPane scrollPane = new JScrollPane(table);
-        String[] columnNames = { "Full name", "Address", "Birth date", "Doctor's full name", "Appointment date", "Diagnosis" };
+        String[] columnNames = { "Full name", "Father's full mame", "Father's earnings", "Mother's full name", "Mother's earnings", "Brother's count", "Sister's count" };
         tableModel.setColumnIdentifiers(columnNames);
         table.setModel(tableModel);
         scrollPane.setPreferredSize(new Dimension(1200, 500));
@@ -60,22 +60,23 @@ public class TablePartial {
         rerender();
     }
 
-    public void setData(ArrayList<Appointment> appointments) {
-        this.appointments = appointments;
+    public void setData(ArrayList<Student> students) {
+        this.students = students;
         rerender();
     }
 
     public void rerender() {
-        ArrayList<Appointment> appointments = dataToDisplay(page, perPage);
+        ArrayList<Student> students = dataToDisplay(page, perPage);
         tableModel.setRowCount(0);
-        for (Appointment appointment : appointments) {
+        for (Student student : students) {
             Object[] row = new Object[] {
-                    appointment.getPatientFullName(),
-                    appointment.getPatientAddress(),
-                    appointment.getPatientBirthDateString(),
-                    appointment.getDoctorFullName(),
-                    appointment.getDateString(),
-                    appointment.getDiagnosis()
+                    student.getFullName(),
+                    student.getFatherFullName(),
+                    student.getFatherEarnings(),
+                    student.getMotherFullName(),
+                    student.getMotherEarnings(),
+                    student.getBrothersCount(),
+                    student.getSistersCount()
             };
             tableModel.addRow(row);
         }
@@ -95,7 +96,7 @@ public class TablePartial {
     }
 
     public int recordCount() {
-        return appointments.size();
+        return students.size();
     }
 
     public int pageCount() {
@@ -181,10 +182,10 @@ public class TablePartial {
         table.setPage(1);
     }
     
-    private ArrayList<Appointment> dataToDisplay(int page, int perPage) {
+    private ArrayList<Student> dataToDisplay(int page, int perPage) {
         int from = (page - 1) * perPage;
         int to = from + perPage;
-        to = to > appointments.size() ? appointments.size() : to;
-        return new ArrayList<Appointment>(appointments.subList(from, to));
+        to = to > students.size() ? students.size() : to;
+        return new ArrayList<Student>(students.subList(from, to));
     }
 }
