@@ -14,12 +14,12 @@ public class StudentsController {
     private IndexWindow indexWindow;
     private SearchWindow searchWindow;
 
-    public StudentsController() {
-        students = new StudentsLocalStorage();
+    public StudentsController(StudentsLocalStorage students) {
+        this.students = students;
     }
 
-    public void index() {
-        indexWindow = new IndexWindow(this);
+    public void index(IndexWindow window) {
+        this.indexWindow = window;
         indexWindow.show();
     }
 
