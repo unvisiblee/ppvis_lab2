@@ -6,10 +6,11 @@ import models.Student;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class StudentsLocalStorage {
-    private ArrayList<Student> records = new ArrayList<Student>();
+    private ArrayList<Student> records = new ArrayList<>();
     private File sourceFile;
 
     public StudentsLocalStorage(File sourceFile) {
@@ -34,7 +35,7 @@ public class StudentsLocalStorage {
     public void readAll() {
         records = new StudentsXMLReader(sourceFile).readAll();
         if (records == null) {
-            records = new ArrayList<Student>();
+            records = new ArrayList<>();
         }
     }
 
@@ -54,26 +55,35 @@ public class StudentsLocalStorage {
         records.add(student);
     }
 
-    public ArrayList<Student> applyFilters(HashMap<String, String> params) {
-        ArrayList results = new ArrayList();
-        results.add(applyStudentNameFilter(params.get("studentName")));
-        results.add(applyStudentSurnameFilter(params.get("studentSurname")));
-        results.add(applyStudentLastNameFilter(params.get("studentLastName")));
-        results.add(applyStudentSistersCountFilter(params.get("studentSistersCount")));
-        results.add(applyStudentBrothersCountFilter(params.get("studentBrothersCount")));
-        results.add(applyStudentMotherEarningsFilter(params.get("studentMotherEarnings")));
-        results.add(applyStudentMotherName(params.get("studentMotherName")));
-        results.add(applyStudentMotherSurname(params.get("studentMotherSurname")));
-        results.add(applyStudentMotherLastName(params.get("studentMotherLastName")));
-        results.add(applyStudentFatherEarnings(params.get("studentFatherEarnings")));
-        results.add(applyStudentFatherName(params.get("studentFatherName")));
-        results.add(applyStudentFatherSurname(params.get("studentFatherSurname")));
-        results.add(applyStudentFatherLastName(params.get("studentFatherLastName")));
-        return results;
+    public ArrayList<Student> applyFilters(Student student){
+        Set<Student> results = new HashSet<>();
+//        ?/ArrayList<Student> c =  new ArrayList<>();
+        applyStudentNameFilter(student.getName()).forEach(e -> results.add(e));
+        applyStudentSurnameFilter(student.getSurname()).forEach(e -> results.add(e));
+        applyStudentLastNameFilter(student.getLastName()).forEach(e -> results.add(e));
+        applyStudentSistersCountFilter(student.getSistersCount()).forEach(e -> results.add(e));
+        applyStudentBrothersCountFilter(student.getBrothersCount()).forEach(e -> results.add(e));
+        applyStudentMotherEarningsFilter(student.getMotherEarnings()).forEach(e -> results.add(e));
+        applyStudentMotherName(student.getMotherName()).forEach(e -> results.add(e));
+        applyStudentMotherSurname(student.getMotherSurname()).forEach(e -> results.add(e));
+        applyStudentMotherLastName(student.getMotherLastName()).forEach(e -> results.add(e));
+        applyStudentFatherEarnings(student.getFatherEarnings()).forEach(e -> results.add(e));
+        applyStudentFatherName(student.getFatherName()).forEach(e -> results.add(e));
+        applyStudentFatherSurname(student.getFatherSurname()).forEach(e -> results.add(e));
+        applyStudentFatherLastName(student.getFatherLastName()).forEach(e -> results.add(e));
+        ArrayList<Student> studentArrayList = new ArrayList<>(results);
+        return studentArrayList;
     }
 
+//    кажеется, пробьлема в add?
+//    но такой момент, что объект может искаться и по одному параметру, и по совокумности
+//            оххх
+
+//    Егор!!
+//    а на листе есть метод, что-то типа uniq? то есть чтобы он переписал его в итоге и оставил только неповторяющиеся записи есть специальные листы не arraylist
+
     private ArrayList<Student> applyStudentNameFilter(ArrayList<Student> data, String studentName) {
-        ArrayList<Student> results = new ArrayList<Student>();
+        ArrayList<Student> results = new ArrayList<>();
         for(Student student : data) {
             if (student.getName().matches(".*" + studentName + ".*")) {
                 results.add(student);
@@ -89,7 +99,7 @@ public class StudentsLocalStorage {
 
 
     private ArrayList<Student> applyStudentSurnameFilter(ArrayList<Student> data, String studentSurname) {
-        ArrayList<Student> results = new ArrayList<Student>();
+        ArrayList<Student> results = new ArrayList<>();
         for(Student student : data) {
             if (student.getSurname().matches(".*" + studentSurname + ".*")) {
                 results.add(student);
@@ -103,7 +113,7 @@ public class StudentsLocalStorage {
     }
 
     private ArrayList<Student> applyStudentLastNameFilter(ArrayList<Student> data, String studentLastName) {
-        ArrayList<Student> results = new ArrayList<Student>();
+        ArrayList<Student> results = new ArrayList<>();
         for(Student student : data) {
             if (student.getLastName().matches(".*" + studentLastName + ".*")) {
                 results.add(student);
@@ -116,50 +126,50 @@ public class StudentsLocalStorage {
         return applyStudentLastNameFilter(records, studentLastName);
     }
 
-    private ArrayList<Student> applyStudentSistersCountFilter(ArrayList<Student> data, String sistersCount) {
-        ArrayList<Student> results = new ArrayList<Student>();
+    private ArrayList<Student> applyStudentSistersCountFilter(ArrayList<Student> data, Integer sistersCount) {
+        ArrayList<Student> results = new ArrayList<>();
         for(Student student : data) {
-            if (student.getSistersCount().toString().matches(sistersCount)) {
+            if (student.getSistersCount() == sistersCount) {
                 results.add(student);
             }
         }
         return results;
     }
 
-    private ArrayList<Student> applyStudentSistersCountFilter(String sistersCount) {
+    private ArrayList<Student> applyStudentSistersCountFilter(Integer sistersCount) {
         return applyStudentSistersCountFilter(records, sistersCount);
     }
 
-    private ArrayList<Student> applyStudentBrothersCountFilter(ArrayList<Student> data, String brothersCount) {
-        ArrayList<Student> results = new ArrayList<Student>();
+    private ArrayList<Student> applyStudentBrothersCountFilter(ArrayList<Student> data, Integer brothersCount) {
+        ArrayList<Student> results = new ArrayList<>();
         for(Student student : data) {
-            if (student.getBrothersCount().toString().matches(brothersCount)) {
+            if (student.getBrothersCount() == brothersCount) {
                 results.add(student);
             }
         }
         return results;
     }
 
-    private ArrayList<Student> applyStudentBrothersCountFilter(String brothersCount) {
+    private ArrayList<Student> applyStudentBrothersCountFilter(Integer brothersCount) {
         return applyStudentBrothersCountFilter(records, brothersCount);
     }
 
-    private ArrayList<Student> applyStudentMotherEarningsFilter(ArrayList<Student> data, String motherEarnings) {
-        ArrayList<Student> results = new ArrayList<Student>();
+    private ArrayList<Student> applyStudentMotherEarningsFilter(ArrayList<Student> data, Double motherEarnings) {
+        ArrayList<Student> results = new ArrayList<>();
         for(Student student : data) {
-            if (student.getMotherEarnings().toString().matches(motherEarnings)) {
+            if (student.getMotherEarnings() == motherEarnings) {
                 results.add(student);
             }
         }
         return results;
     }
 
-    private ArrayList<Student> applyStudentMotherEarningsFilter(String motherEarnings) {
+    private ArrayList<Student> applyStudentMotherEarningsFilter(Double motherEarnings) {
         return applyStudentMotherEarningsFilter(records, motherEarnings);
     }
 
     private ArrayList<Student> applyStudentMotherName(ArrayList<Student> data, String motherName) {
-        ArrayList<Student> results = new ArrayList<Student>();
+        ArrayList<Student> results = new ArrayList<>();
         for(Student student : data) {
             if (student.getMotherName().matches(".*" + motherName + ".*")) {
                 results.add(student);
@@ -174,7 +184,7 @@ public class StudentsLocalStorage {
 
 
     private ArrayList<Student> applyStudentMotherSurname(ArrayList<Student> data, String motherSurname) {
-        ArrayList<Student> results = new ArrayList<Student>();
+        ArrayList<Student> results = new ArrayList<>();
         for(Student student : data) {
             if (student.getMotherSurname().matches(".*" + motherSurname + ".*")) {
                 results.add(student);
@@ -188,7 +198,7 @@ public class StudentsLocalStorage {
     }
 
     private ArrayList<Student> applyStudentMotherLastName(ArrayList<Student> data, String motherLastName) {
-        ArrayList<Student> results = new ArrayList<Student>();
+        ArrayList<Student> results = new ArrayList<>();
         for(Student student : data) {
             if (student.getMotherLastName().matches(".*" + motherLastName+ ".*")) {
                 results.add(student);
@@ -201,22 +211,22 @@ public class StudentsLocalStorage {
         return applyStudentMotherLastName(records, motherLastName);
     }
 
-    private ArrayList<Student> applyStudentFatherEarnings(ArrayList<Student> data, String fatherEarnings) {
-        ArrayList<Student> results = new ArrayList<Student>();
+    private ArrayList<Student> applyStudentFatherEarnings(ArrayList<Student> data, Double fatherEarnings) {
+        ArrayList<Student> results = new ArrayList<>();
         for(Student student : data) {
-            if (student.getFatherEarnings().toString().matches(fatherEarnings)) {
+            if (student.getFatherEarnings() == fatherEarnings) {
                 results.add(student);
             }
         }
         return results;
     }
 
-    private ArrayList<Student> applyStudentFatherEarnings(String fatherEarnings) {
+    private ArrayList<Student> applyStudentFatherEarnings(Double fatherEarnings) {
         return applyStudentFatherEarnings(records, fatherEarnings);
     }
 
     private ArrayList<Student> applyStudentFatherName(ArrayList<Student> data, String fatherName) {
-        ArrayList<Student> results = new ArrayList<Student>();
+        ArrayList<Student> results = new ArrayList<>();
         for(Student student : data) {
             if (student.getFatherName().matches(".*" + fatherName + ".*")) {
                 results.add(student);
@@ -231,7 +241,7 @@ public class StudentsLocalStorage {
 
 
     private ArrayList<Student> applyStudentFatherSurname(ArrayList<Student> data, String fatherSurname) {
-        ArrayList<Student> results = new ArrayList<Student>();
+        ArrayList<Student> results = new ArrayList<>();
         for(Student student : data) {
             if (student.getFatherSurname().matches(".*" + fatherSurname + ".*")) {
                 results.add(student);
@@ -245,7 +255,7 @@ public class StudentsLocalStorage {
     }
 
     private ArrayList<Student> applyStudentFatherLastName(ArrayList<Student> data, String fatherLastName) {
-        ArrayList<Student> results = new ArrayList<Student>();
+        ArrayList<Student> results = new ArrayList<>();
         for(Student student : data) {
             if (student.getFatherLastName().matches(".*" + fatherLastName+ ".*")) {
                 results.add(student);

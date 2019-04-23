@@ -1,6 +1,8 @@
 package views;
 
 import controllers.StudentsController;
+import models.Parent;
+import models.Student;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -49,21 +51,31 @@ public class DeleteWindow {
 
     private ActionListener getSubmitButtonListener(StudentFormPartial form) {
         return e -> {
-            HashMap<String, String> params = new HashMap<String, String>();
-            params.put("studentName", form.getStudentName());
-            params.put("studentSurname", form.getStudentSurname());
-            params.put("studentLastName", form.getStudentLastName());
-            params.put("studentSistersCount", form.getStudentSistersCount());
-            params.put("studentBrothersCount", form.getStudentBrothersCount());
-            params.put("motherName", form.getMotherName());
-            params.put("motherSurname", form.getMotherSurname());
-            params.put("motherLastName", form.getMotherLastName());
-            params.put("motherEarnings", form.getMotherEarnings());
-            params.put("fatherName", form.getFatherName());
-            params.put("fatherSurname", form.getFatherSurname());
-            params.put("fatherLastName", form.getFatherLastName());
-            params.put("fatherEarnings", form.getFatherEarnings());
-            controller.remove(params);
+            Student student = new Student();
+            student.setName(form.getStudentName());
+            student.setLastname(form.getStudentLastName());
+            student.setSurname(form.getStudentSurname());
+
+            student.setSistersCount(Boolean.parseBoolean(form.getStudentSistersCount()) ? Integer.valueOf(form.getStudentSistersCount()) : 0);
+            student.setBrothersCount(Boolean.parseBoolean(form.getStudentBrothersCount()) ? Integer.valueOf(form.getStudentBrothersCount()) : 0);
+
+            Parent mother = new Parent();
+            mother.setName(form.getMotherName());
+            mother.setLastName(form.getMotherLastName());
+            mother.setSurname(form.getMotherSurname());
+            mother.setEarnings(Boolean.parseBoolean(form.getMotherEarnings()) ? Double.valueOf(form.getMotherEarnings()) : 0);
+
+            student.setMother(mother);
+
+            Parent father = new Parent();
+            father.setName(form.getFatherName());
+            father.setLastName(form.getFatherLastName());
+            father.setSurname(form.getFatherSurname());
+            father.setEarnings(Boolean.parseBoolean(form.getFatherEarnings()) ? Double.valueOf(form.getFatherEarnings()) : 0);
+
+            student.setFather(father);
+
+            controller.remove(student);
         };
     }
 }

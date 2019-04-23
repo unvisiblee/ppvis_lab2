@@ -7,7 +7,6 @@ import database.StudentsLocalStorage;
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class StudentsController {
     private StudentsLocalStorage students;
@@ -36,19 +35,18 @@ public class StudentsController {
         new DeleteWindow(this).show();
     }
 
-    public void create(HashMap<String, String> params) {
-        Student newRecord = new Student(params);
-        students.addRecord(newRecord);
+    public void create(Student student) {
+        students.addRecord(student);
         indexWindow.updateTable();
     }
 
-    public void select(HashMap<String, String> params) {
-        ArrayList<Student> searchResults = students.applyFilters(params);
+    public void select(Student student) {
+        ArrayList<Student> searchResults = students.applyFilters(student);
         searchWindow.updateTable(searchResults);
     }
 
-    public void remove(HashMap<String, String> params) {
-        ArrayList<Student> searchResults = students.applyFilters(params);
+    public void remove(Student student) {
+        ArrayList<Student> searchResults = students.applyFilters(student);
         ArrayList<Student> students = this.students.getRecords();
         students.removeAll(searchResults);
         this.students.setRecords(students);
