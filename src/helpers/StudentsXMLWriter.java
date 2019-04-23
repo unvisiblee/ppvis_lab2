@@ -35,7 +35,7 @@ public class StudentsXMLWriter {
             fileWriter.close();
             this.file = file;
         } catch (IOException e) {
-            new Alert("Cannot write to file.\nInsure it's in right format and you have write permissions.");
+            new Alert("Can't write to file");
             e.printStackTrace();
         }
     }
@@ -122,7 +122,7 @@ public class StudentsXMLWriter {
             StreamResult streamResult = new StreamResult(file);
             transformer.transform(domSource, streamResult);
         } catch (ParserConfigurationException | IOException | SAXException | TransformerException e) {
-            new Alert("Cannot write to file.\nInsure it's in right format and you have write permissions.");
+            new Alert("Can't");
             e.printStackTrace();
         }
     }

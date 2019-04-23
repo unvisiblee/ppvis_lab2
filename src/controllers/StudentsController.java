@@ -84,9 +84,9 @@ public class StudentsController {
 
     private String getRemovedRecordsList(ArrayList<Student> removedRecords) {
         if (removedRecords.size() == 0) {
-            return "No records removed.";
+            return "No matches.";
         }
-        String text = new String(removedRecords.size() + " students removed:\n");
+        String text = removedRecords.size() + " students were removed:\n";
         for (int index = 0; index < removedRecords.size(); index++) {
             Student student = removedRecords.get(index);
             text += student.getFullName() + "\n";
