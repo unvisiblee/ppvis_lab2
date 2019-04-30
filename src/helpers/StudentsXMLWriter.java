@@ -89,7 +89,7 @@ public class StudentsXMLWriter {
 
                 Element motherEarnings = document.createElement("motherEarnings");
                 motherEarnings.appendChild(document.createTextNode(student.getMotherEarnings().toString()));
-                motherElement.appendChild(motherName);
+                motherElement.appendChild(motherEarnings);
 
                 Element fatherElement = document.createElement("father");
 
@@ -103,17 +103,16 @@ public class StudentsXMLWriter {
 
                 Element fatherLastName = document.createElement("fatherLastName");
                 fatherLastName.appendChild(document.createTextNode(student.getFatherLastName()));
-                motherElement.appendChild(motherLastName);
+                motherElement.appendChild(fatherLastName);
 
                 Element fatherEarnings = document.createElement("fatherEarnings");
                 fatherEarnings.appendChild(document.createTextNode(student.getFatherEarnings().toString()));
-                fatherElement.appendChild(fatherName);
+                fatherElement.appendChild(fatherEarnings);
 
                 studentElement.appendChild(motherElement);
 
                 studentElement.appendChild(fatherElement);
             }
-            
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             transformer.setOutputProperty(OutputKeys.METHOD, "xml");
