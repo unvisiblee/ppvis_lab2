@@ -47,7 +47,7 @@ public class StudentsXMLWriter {
             Document document = documentBuilder.parse(file);
             document.getDocumentElement().normalize();
             Node studentsTag = document.getElementsByTagName("students").item(0);
-            removeAll(document, Node.ELEMENT_NODE, "students");
+            removeAll(document, Node.ELEMENT_NODE, "student");
 
             for(Student student: students) {
                 Element studentElement = document.createElement("student");
@@ -113,7 +113,7 @@ public class StudentsXMLWriter {
 
                 studentElement.appendChild(fatherElement);
             }
-
+            
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             transformer.setOutputProperty(OutputKeys.METHOD, "xml");

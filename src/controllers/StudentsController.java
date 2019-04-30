@@ -72,7 +72,7 @@ public class StudentsController {
             JFileChooser fileChooser = new JFileChooser();
             int response = fileChooser.showOpenDialog(null);
             if (response == JFileChooser.APPROVE_OPTION) {
-                File file = fileChooser.getSelectedFile();;
+                File file = fileChooser.getSelectedFile();
                 open(file);
             }
         }

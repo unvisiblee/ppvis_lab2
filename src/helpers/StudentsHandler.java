@@ -42,7 +42,6 @@ public class StudentsHandler extends DefaultHandler {
         currentElement = qName;
     }
 
-//    STOP HEER
     @Override
     public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
         if (qName.equals("student")) {
