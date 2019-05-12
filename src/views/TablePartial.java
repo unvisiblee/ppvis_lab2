@@ -20,10 +20,6 @@ public class TablePartial {
     private int page = 1;
     private int perPage = 30;
 
-    public TablePartial() {
-        this(new ArrayList<Student>());
-    }
-
     public TablePartial(ArrayList<Student> students) {
         this.students = students;
 

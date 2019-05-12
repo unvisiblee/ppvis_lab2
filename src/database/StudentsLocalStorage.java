@@ -1,7 +1,7 @@
 package database;
 
-import helpers.StudentsXMLReader;
-import helpers.StudentsXMLWriter;
+import XMLParsing.StudentsXMLReader;
+import XMLParsing.StudentsXMLWriter;
 import models.Student;
 
 import java.io.File;
@@ -31,12 +31,12 @@ public class StudentsLocalStorage {
         }
     }
 
-    public void commitAll() {
+    public void saveAll() {
         new StudentsXMLWriter(sourceFile).writeAll(records);
     }
 
     public ArrayList<Student> getRecords() {
-        return records;
+        return new ArrayList<>(records);
     }
 
     public void setRecords(ArrayList<Student> students) {

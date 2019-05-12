@@ -1,4 +1,4 @@
-package helpers;
+package XMLParsing;
 
 import models.Student;
 import models.Parent;
@@ -17,9 +17,9 @@ public class StudentsHandler extends DefaultHandler {
     private Parent mother;
     private Parent father;
     private String currentElement;
-    private boolean isStudent;
-    private boolean isMother;
-    private boolean isFather;
+    private boolean studentObj;
+    private boolean motherObj;
+    private boolean fatherObj;
 
 
     public ArrayList<Student> getStudents() {
@@ -29,41 +29,41 @@ public class StudentsHandler extends DefaultHandler {
     @Override
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
         if (qName.equals("students")) {
-            students = new ArrayList<Student>();
+            students = new ArrayList<>();
         }
 
         if (qName.equals("student")) {
             student = new Student();
-            isStudent = true;
+            studentObj = true;
         }
 
         if (qName.equals("mother")) {
             mother = new Parent();
-            isMother = true;
+            motherObj = true;
         }
 
         if (qName.equals("father")) {
             father= new Parent();
-            isFather = true;
+            fatherObj = true;
         }
         currentElement = qName;
     }
 
     @Override
-    public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
+    public void endElement(String namespaceURI, String localName, String qName) {
         if (qName.equals("student")) {
             students.add(student);
-            isStudent = false;
+            studentObj = false;
         }
 
         if (qName.equals("mother")) {
             student.setMother(mother);
-            isMother= false;
+            motherObj= false;
         }
 
         if (qName.equals("father")) {
             student.setFather(father);
-            isFather = false;
+            fatherObj = false;
         }
 
         currentElement = "";
@@ -71,55 +71,55 @@ public class StudentsHandler extends DefaultHandler {
 
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
-        if (currentElement.equals("name") && isStudent) {
+        if (currentElement.equals("name") && studentObj) {
             student.setName(text(ch, start, length));
         }
 
-        if (currentElement.equals("surname") && isStudent) {
+        if (currentElement.equals("surname") && studentObj) {
             student.setSurname(text(ch, start, length));
         }
 
-        if (currentElement.equals("lastName") && isStudent) {
-            student.setLastname(text(ch, start, length));
+        if (currentElement.equals("lastName") && studentObj) {
+            student.setLastName(text(ch, start, length));
         }
 
-        if (currentElement.equals("sistersCount") && isStudent) {
+        if (currentElement.equals("sistersCount") && studentObj) {
             student.setSistersCount(parseInt(text(ch, start, length)));
         }
 
-        if (currentElement.equals("brothersCount") && isStudent) {
+        if (currentElement.equals("brothersCount") && studentObj) {
             student.setBrothersCount(parseInt(text(ch, start, length)));
         }
 
-        if (currentElement.equals("fatherName") && isFather) {
+        if (currentElement.equals("fatherName") && fatherObj) {
             father.setName(text(ch, start, length));
         }
 
-        if (currentElement.equals("fatherSurname") && isFather) {
+        if (currentElement.equals("fatherSurname") && fatherObj) {
             father.setSurname(text(ch, start, length));
         }
 
-        if (currentElement.equals("fatherLastName") && isFather) {
+        if (currentElement.equals("fatherLastName") && fatherObj) {
             father.setLastName(text(ch, start, length));
         }
 
-        if (currentElement.equals("fatherEarnings") && isFather) {
+        if (currentElement.equals("fatherEarnings") && fatherObj) {
             father.setEarnings(parseDouble(text(ch, start, length)));
         }
 
-        if (currentElement.equals("motherName") && isMother) {
+        if (currentElement.equals("motherName") && motherObj) {
             mother.setName(text(ch, start, length));
         }
 
-        if (currentElement.equals("motherSurname") && isMother) {
+        if (currentElement.equals("motherSurname") && motherObj) {
             mother.setSurname(text(ch, start, length));
         }
 
-        if (currentElement.equals("motherLastName") && isMother) {
+        if (currentElement.equals("motherLastName") && motherObj) {
             mother.setLastName(text(ch, start, length));
         }
 
-        if (currentElement.equals("motherEarnings") && isMother) {
+        if (currentElement.equals("motherEarnings") && motherObj) {
             mother.setEarnings(parseDouble(text(ch, start, length)));
         }
     }

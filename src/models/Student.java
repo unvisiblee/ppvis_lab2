@@ -64,14 +64,6 @@ public class Student {
         return brothersCount;
     }
 
-    public Parent getMother() {
-        return mother;
-    }
-
-    public Parent getFather() {
-        return father;
-    }
-
     public Double getMotherEarnings() {
         return mother.getEarnings();
     }
@@ -120,7 +112,7 @@ public class Student {
         this.surname = surname;
     }
 
-    public void setLastname(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
@@ -134,38 +126,6 @@ public class Student {
 
     public void setMother(Parent mother) {
         this.mother = mother;
-    }
-
-    public void setMotherName(String motherName) {
-        this.mother.setName(motherName);
-    }
-
-    public void setMotherSurname(String motherSurname) {
-        this.mother.setSurname(motherSurname);
-    }
-
-    public void setMotherLastName(String motherLastName) {
-        this.mother.setLastName(motherLastName);
-    }
-
-    public void setMotherEarnings(Double motherEarnings) {
-        this.mother.setEarnings(motherEarnings);
-    }
-
-    public void setFatherName(String fatherName) {
-        this.father.setName(fatherName);
-    }
-
-    public void setFatherSurname(String fatherSurname) {
-        this.father.setSurname(fatherSurname);
-    }
-
-    public void setFatherLastName(String fatherLastName) {
-        this.father.setLastName(fatherLastName);
-    }
-
-    public void setFatherEarnings(Double fatherEarnings) {
-        this.father.setEarnings(fatherEarnings);
     }
 
     public void setFather(Parent father) {

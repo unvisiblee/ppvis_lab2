@@ -62,12 +62,12 @@ public class StudentsController {
 
     public void save(File file) {
         students.setSourceFile(file);
-        students.commitAll();
+        students.saveAll();
     }
 
     public void save() {
         if (students.isSourceSet()) {
-            students.commitAll();
+            students.saveAll();
         } else {
             JFileChooser fileChooser = new JFileChooser();
             int response = fileChooser.showOpenDialog(null);

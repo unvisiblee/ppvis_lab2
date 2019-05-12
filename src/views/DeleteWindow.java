@@ -53,17 +53,17 @@ public class DeleteWindow {
         return e -> {
             Student student = new Student();
             student.setName(form.getStudentName());
-            student.setLastname(form.getStudentLastName());
+            student.setLastName(form.getStudentLastName());
             student.setSurname(form.getStudentSurname());
 
-            student.setSistersCount(Boolean.parseBoolean(form.getStudentSistersCount()) ? Integer.valueOf(form.getStudentSistersCount()) : 0);
-            student.setBrothersCount(Boolean.parseBoolean(form.getStudentBrothersCount()) ? Integer.valueOf(form.getStudentBrothersCount()) : 0);
+            student.setSistersCount(form.getStudentSistersCount().isEmpty() ? 0 : Integer.valueOf(form.getStudentSistersCount()));
+            student.setBrothersCount(form.getStudentBrothersCount().isEmpty() ? 0 :Integer.valueOf(form.getStudentBrothersCount()));
 
             Parent mother = new Parent();
             mother.setName(form.getMotherName());
             mother.setLastName(form.getMotherLastName());
             mother.setSurname(form.getMotherSurname());
-            mother.setEarnings(Boolean.parseBoolean(form.getMotherEarnings()) ? Double.valueOf(form.getMotherEarnings()) : 0);
+            mother.setEarnings(form.getMotherEarnings().isEmpty() ? 0.0 : Double.valueOf(form.getMotherEarnings()));
 
             student.setMother(mother);
 
@@ -71,7 +71,7 @@ public class DeleteWindow {
             father.setName(form.getFatherName());
             father.setLastName(form.getFatherLastName());
             father.setSurname(form.getFatherSurname());
-            father.setEarnings(Boolean.parseBoolean(form.getFatherEarnings()) ? Double.valueOf(form.getFatherEarnings()) : 0);
+            father.setEarnings(form.getFatherEarnings().isEmpty() ? 0.0 : Double.valueOf(form.getFatherEarnings()));
 
             student.setFather(father);
 

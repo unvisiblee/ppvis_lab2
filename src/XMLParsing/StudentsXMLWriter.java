@@ -1,4 +1,4 @@
-package helpers;
+package XMLParsing;
 
 import views.Alert;
 import models.Student;
@@ -103,7 +103,7 @@ public class StudentsXMLWriter {
 
                 Element fatherLastName = document.createElement("fatherLastName");
                 fatherLastName.appendChild(document.createTextNode(student.getFatherLastName()));
-                motherElement.appendChild(fatherLastName);
+                fatherElement.appendChild(fatherLastName);
 
                 Element fatherEarnings = document.createElement("fatherEarnings");
                 fatherEarnings.appendChild(document.createTextNode(student.getFatherEarnings().toString()));

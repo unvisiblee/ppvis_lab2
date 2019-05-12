@@ -1,4 +1,4 @@
-package helpers;
+package XMLParsing;
 
 import models.Student;
 import views.Alert;

@@ -52,7 +52,7 @@ public class NewWindow {
         return e -> {
             Student student = new Student();
             student.setName(form.getStudentName());
-            student.setLastname(form.getStudentLastName());
+            student.setLastName(form.getStudentLastName());
             student.setSurname(form.getStudentSurname());
 
             student.setSistersCount(Integer.valueOf(form.getStudentSistersCount()));

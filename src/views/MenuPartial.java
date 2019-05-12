@@ -21,13 +21,10 @@ public class MenuPartial {
         JMenu menu = new JMenu("File");
         JMenuItem openItem = new JMenuItem("Open");
         JMenuItem saveItem = new JMenuItem("Save");
-        JMenuItem saveAsItem = new JMenuItem("Save as");
         openItem.addActionListener(getOpenItemListener(fileChooser));
-        saveItem.addActionListener(getSaveItemListener());
-        saveAsItem.addActionListener(getSaveAsItemListener(fileChooser));
+        saveItem.addActionListener(getSaveItemListener(fileChooser));
         menu.add(openItem);
         menu.add(saveItem);
-        menu.add(saveAsItem);
         menuBar.add(menu);
     }
 
@@ -45,13 +42,7 @@ public class MenuPartial {
         };
     }
 
-    private ActionListener getSaveItemListener() {
-        return e -> {
-            controller.save();
-        };
-    }
-
-    private ActionListener getSaveAsItemListener(JFileChooser fileChooser) {
+    private ActionListener getSaveItemListener(JFileChooser fileChooser) {
         return e -> {
             int response = fileChooser.showSaveDialog(null);
             if (response == JFileChooser.APPROVE_OPTION) {
