@@ -1,6 +1,7 @@
 package views;
 
 import controllers.StudentsController;
+import dataGetters.StudentFormGetter;
 import models.Parent;
 import models.Student;
 
@@ -50,29 +51,8 @@ public class NewWindow {
 
     private ActionListener getSubmitButtonListener(StudentFormPartial form) {
         return e -> {
-            Student student = new Student();
-            student.setName(form.getStudentName());
-            student.setLastName(form.getStudentLastName());
-            student.setSurname(form.getStudentSurname());
-
-            student.setSistersCount(Integer.valueOf(form.getStudentSistersCount()));
-            student.setBrothersCount(Integer.valueOf(form.getStudentBrothersCount()));
-
-            Parent mother = new Parent();
-            mother.setName(form.getMotherName());
-            mother.setLastName(form.getMotherLastName());
-            mother.setSurname(form.getMotherSurname());
-            mother.setEarnings(Double.valueOf(form.getMotherEarnings()));
-
-            student.setMother(mother);
-
-            Parent father = new Parent();
-            father.setName(form.getFatherName());
-            father.setLastName(form.getFatherLastName());
-            father.setSurname(form.getFatherSurname());
-            father.setEarnings(Double.valueOf(form.getFatherEarnings()));
-
-            student.setFather(father);
+            StudentFormGetter getter = new StudentFormGetter();
+            Student student = getter.getData(form);
 
             controller.create(student);
         };

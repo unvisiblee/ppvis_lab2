@@ -1,6 +1,7 @@
 package views;
 
 import controllers.StudentsController;
+import dataGetters.StudentFormGetter;
 import models.Parent;
 import models.Student;
 import database.StudentsLocalStorage;
@@ -15,6 +16,7 @@ public class SearchWindow {
     private JFrame searchWindow;
     private TablePartial table;
     private StudentsLocalStorage storage;
+    private StudentFormGetter getter;
 
     public SearchWindow(StudentsController controller) {
         this.controller = controller;
@@ -62,30 +64,9 @@ public class SearchWindow {
 
     private ActionListener getSearchButtonListener(StudentFormPartial form) {
         return e -> {
-            Student student = new Student();
-            student.setName(form.getStudentName());
-            student.setLastName(form.getStudentLastName());
-            student.setSurname(form.getStudentSurname());
 
-            student.setSistersCount(form.getStudentSistersCount().isEmpty() ? 0 : Integer.valueOf(form.getStudentSistersCount()));
-            student.setBrothersCount(form.getStudentBrothersCount().isEmpty() ? 0 : Integer.valueOf(form.getStudentBrothersCount()));
-
-            Parent mother = new Parent();
-            mother.setName(form.getMotherName());
-            mother.setLastName(form.getMotherLastName());
-            mother.setSurname(form.getMotherSurname());
-            mother.setEarnings(form.getMotherEarnings().isEmpty() ? 0.0 : Double.valueOf(form.getMotherEarnings()));
-
-            student.setMother(mother);
-
-            Parent father = new Parent();
-            father.setName(form.getFatherName());
-            father.setLastName(form.getFatherLastName());
-            father.setSurname(form.getFatherSurname());
-            father.setEarnings(form.getFatherEarnings().isEmpty() ? 0.0 : Double.valueOf(form.getFatherEarnings()));
-
-            student.setFather(father);
-
+            StudentFormGetter getter = new StudentFormGetter();
+            Student student = getter.getData(form);
             updateTable(controller.select(student));
         };
     }

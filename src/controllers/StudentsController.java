@@ -4,14 +4,12 @@ import models.Student;
 import views.*;
 import database.StudentsLocalStorage;
 
-import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 
 public class StudentsController {
     private StudentsLocalStorage students;
     private IndexWindow indexWindow;
-    private SearchWindow searchWindow;
 
     public StudentsController(StudentsLocalStorage students) {
         this.students = students;
@@ -20,19 +18,6 @@ public class StudentsController {
     public void index(IndexWindow window) {
         this.indexWindow = window;
         indexWindow.show();
-    }
-
-    public void newRecord() {
-        new NewWindow(this).show();
-    }
-
-    public void search() {
-        searchWindow = new SearchWindow(this);
-        searchWindow.show();
-    }
-
-    public void delete() {
-        new DeleteWindow(this).show();
     }
 
     public void create(Student student) {
@@ -63,19 +48,6 @@ public class StudentsController {
     public void save(File file) {
         students.setSourceFile(file);
         students.saveAll();
-    }
-
-    public void save() {
-        if (students.isSourceSet()) {
-            students.saveAll();
-        } else {
-            JFileChooser fileChooser = new JFileChooser();
-            int response = fileChooser.showOpenDialog(null);
-            if (response == JFileChooser.APPROVE_OPTION) {
-                File file = fileChooser.getSelectedFile();
-                open(file);
-            }
-        }
     }
 
     public StudentsLocalStorage getStudents() {
