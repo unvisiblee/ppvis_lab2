@@ -32,14 +32,17 @@ public class ControlsPartial {
     }
 
     private ActionListener getAddButtonListener() {
-        return e -> controller.newRecord();
+        NewWindow window = new NewWindow(controller);
+        return e -> window.show();
     }
 
     private ActionListener getSearchButtonListener() {
-        return e -> controller.search();
+        SearchWindow window = new SearchWindow(controller);
+        return e -> window.show();
     }
 
     private ActionListener getDeleteButtonListener() {
-        return e -> controller.delete();
+        DeleteWindow window = new DeleteWindow(controller);
+        return e -> window.show();
     }
 }

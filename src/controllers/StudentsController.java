@@ -40,9 +40,9 @@ public class StudentsController {
         indexWindow.updateTable();
     }
 
-    public void select(Student student) {
+    public ArrayList<Student> select(Student student) {
         ArrayList<Student> searchResults = students.applyFilters(student);
-        searchWindow.updateTable(searchResults);
+        return searchResults;
     }
 
     public void remove(Student student) {

@@ -3,6 +3,7 @@ package views;
 import controllers.StudentsController;
 import models.Parent;
 import models.Student;
+import database.StudentsLocalStorage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +14,7 @@ public class SearchWindow {
     private StudentsController controller;
     private JFrame searchWindow;
     private TablePartial table;
+    private StudentsLocalStorage storage;
 
     public SearchWindow(StudentsController controller) {
         this.controller = controller;
@@ -84,7 +86,7 @@ public class SearchWindow {
 
             student.setFather(father);
 
-            controller.select(student);
+            updateTable(controller.select(student));
         };
     }
 }
