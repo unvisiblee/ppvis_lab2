@@ -14,10 +14,6 @@ public class StudentsLocalStorage {
 
     public StudentsLocalStorage() {}
 
-    public boolean isSourceSet() {
-        return (sourceFile != null);
-    }
-
     public StudentsLocalStorage setSourceFile(File sourceFile) {
         this.sourceFile = sourceFile;
         return this;

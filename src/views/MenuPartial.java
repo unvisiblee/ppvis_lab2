@@ -18,14 +18,32 @@ public class MenuPartial {
         fileChooser.setFileFilter(new FileNameExtensionFilter(".xml","xml"));
 
         menuBar = new JMenuBar();
+
         JMenu menu = new JMenu("File");
         JMenuItem openItem = new JMenuItem("Open");
         JMenuItem saveItem = new JMenuItem("Save");
+
+        JMenu action = new JMenu("Action");
+        JMenuItem createItem = new JMenuItem("Create");
+        JMenuItem deleteItem = new JMenuItem("Delete");
+        JMenuItem searchItem = new JMenuItem("Search");
+
         openItem.addActionListener(getOpenItemListener(fileChooser));
         saveItem.addActionListener(getSaveItemListener(fileChooser));
+
+        createItem.addActionListener(getCreateItemListener());
+        deleteItem.addActionListener(getDeleteItemListener());
+        searchItem.addActionListener(getSearchItemListener());
+
         menu.add(openItem);
         menu.add(saveItem);
+
+        action.add(createItem);
+        action.add(deleteItem);
+        action.add(searchItem);
+
         menuBar.add(menu);
+        menuBar.add(action);
     }
 
     public JMenuBar getMenuBar() {
@@ -50,5 +68,20 @@ public class MenuPartial {
                 controller.save(file);
             }
         };
+    }
+
+    private ActionListener getCreateItemListener() {
+        NewWindow window = new NewWindow(controller);
+        return e -> window.show();
+    }
+
+    private ActionListener getDeleteItemListener() {
+        DeleteWindow window = new DeleteWindow(controller);
+        return e -> window.show();
+    }
+
+    private ActionListener getSearchItemListener() {
+        SearchWindow window = new SearchWindow(controller);
+        return e -> window.show();
     }
 }
