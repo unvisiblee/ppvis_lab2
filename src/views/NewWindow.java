@@ -55,6 +55,10 @@ public class NewWindow {
             Student student = getter.getData(form);
 
             controller.create(student);
+
+            IndexWindow indexWindow = new IndexWindow(this.controller);
+            indexWindow.updateTable();
+            indexWindow.show();
         };
     }
 }

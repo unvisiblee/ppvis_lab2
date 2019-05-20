@@ -8,6 +8,6 @@ public class ApplicationController {
         StudentsLocalStorage students = new StudentsLocalStorage();
         StudentsController controller = new StudentsController(students);
         IndexWindow indexWindow = new IndexWindow(controller);
-        controller.index(indexWindow);
+        indexWindow.show();
     }
 }

@@ -2,11 +2,11 @@ package views;
 
 import controllers.StudentsController;
 import dataGetters.StudentFormGetter;
-import models.Parent;
 import models.Student;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class DeleteWindow {
     private StudentsController controller;
@@ -55,7 +55,31 @@ public class DeleteWindow {
             StudentFormGetter getter = new StudentFormGetter();
             Student student = getter.getData(form);
 
-            controller.remove(student);
+            List<Student> searchResults = this.controller.students.applyFilters(student);
+
+            controller.remove(searchResults);
+
+            new Alert(getRemovedRecordsList(searchResults));
+
+            IndexWindow indexWindow = new IndexWindow(this.controller);
+            indexWindow.updateTable();
+            indexWindow.show();
         };
     }
+
+    private String getRemovedRecordsList(List<Student> removedRecords) {
+        if (removedRecords.size() == 0) {
+            return "No matches.";
+        }
+        String text = removedRecords.size() + " students were removed:\n";
+        for (int index = 0; index < removedRecords.size(); index++) {
+            Student student = removedRecords.get(index);
+            text += student.getFullName() + "\n";
+            if (index >= 9) {
+                return text + "And " + (removedRecords.size() - index - 1) + " more.";
+            }
+        }
+        return text;
+    }
+
 }

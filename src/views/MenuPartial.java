@@ -54,8 +54,13 @@ public class MenuPartial {
         return e -> {
             int response = fileChooser.showOpenDialog(null);
             if (response == JFileChooser.APPROVE_OPTION) {
-                File file = fileChooser.getSelectedFile();;
+                File file = fileChooser.getSelectedFile();
                 controller.open(file);
+
+                IndexWindow indexWindow = new IndexWindow(controller);
+                indexWindow.updateTable();
+                indexWindow.show();
+
             }
         };
     }

@@ -9,7 +9,7 @@ import database.StudentsLocalStorage;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.List;
 
 public class SearchWindow {
     private StudentsController controller;
@@ -54,7 +54,7 @@ public class SearchWindow {
         searchWindow.dispose();
     }
 
-    public void updateTable(ArrayList<Student> students) {
+    public void updateTable(List<Student> students) {
         table.setData(students);
     }
 
