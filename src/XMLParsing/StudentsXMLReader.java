@@ -9,6 +9,8 @@ import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.xml.sax.SAXException;
 
 public class StudentsXMLReader {
@@ -28,7 +30,7 @@ public class StudentsXMLReader {
         handler = new StudentsHandler();
     }
 
-    public ArrayList<Student> readAll() {
+    public List<Student> readAll() {
         try {
             parser.parse(file, handler);
         } catch (SAXException | IOException e) {

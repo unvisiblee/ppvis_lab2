@@ -5,6 +5,7 @@ import models.Student;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -40,7 +41,7 @@ public class StudentsXMLWriter {
         }
     }
 
-    public void writeAll(ArrayList<Student> students) {
+    public void writeAll(List<Student> students) {
         try {
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();

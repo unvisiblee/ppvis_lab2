@@ -7,12 +7,13 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
 public class StudentsHandler extends DefaultHandler {
-    private ArrayList<Student> students;
+    private List<Student> students;
     private Student student;
     private Parent mother;
     private Parent father;
@@ -22,7 +23,7 @@ public class StudentsHandler extends DefaultHandler {
     private boolean fatherObj;
 
 
-    public ArrayList<Student> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 

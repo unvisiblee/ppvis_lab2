@@ -10,17 +10,18 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TablePartial {
     private JPanel panel = new JPanel(new BorderLayout());
     private DefaultTableModel tableModel = getModel();
     private JLabel currentPageLabel;
     private JTextField updatePerPageField;
-    private ArrayList<Student> students;
+    private List<Student> students;
     private int page = 1;
     private int perPage = 30;
 
-    public TablePartial(ArrayList<Student> students) {
+    public TablePartial(List<Student> students) {
         this.students = students;
 
         JTable table = new JTable();
@@ -56,13 +57,13 @@ public class TablePartial {
         rerender();
     }
 
-    public void setData(ArrayList<Student> students) {
+    public void setData(List<Student> students) {
         this.students = students;
         rerender();
     }
 
     public void rerender() {
-        ArrayList<Student> students = dataToDisplay(page, perPage);
+        List<Student> students = dataToDisplay(page, perPage);
         tableModel.setRowCount(0);
         for (Student student : students) {
             Object[] row = new Object[] {
@@ -178,7 +179,7 @@ public class TablePartial {
         table.setPage(1);
     }
     
-    private ArrayList<Student> dataToDisplay(int page, int perPage) {
+    private List<Student> dataToDisplay(int page, int perPage) {
         int from = (page - 1) * perPage;
         int to = from + perPage;
         to = to > students.size() ? students.size() : to;

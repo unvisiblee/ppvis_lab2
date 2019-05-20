@@ -7,9 +7,10 @@ import selections.StudentsSelection;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StudentsLocalStorage {
-    private ArrayList<Student> records = new ArrayList<>();
+    private List<Student> records = new ArrayList<>();
     private File sourceFile;
 
     public StudentsLocalStorage() {}
@@ -30,11 +31,11 @@ public class StudentsLocalStorage {
         new StudentsXMLWriter(sourceFile).writeAll(records);
     }
 
-    public ArrayList<Student> getRecords() {
+    public List<Student> getRecords() {
         return new ArrayList<>(records);
     }
 
-    public void setRecords(ArrayList<Student> students) {
+    public void setRecords(List<Student> students) {
         this.records = students;
     }
 
@@ -42,7 +43,7 @@ public class StudentsLocalStorage {
         records.add(student);
     }
 
-    public ArrayList<Student> applyFilters(Student student){
+    public List<Student> applyFilters(Student student){
         StudentsSelection selection = new StudentsSelection();
 
         return selection.suitableStudents(student, this.records);

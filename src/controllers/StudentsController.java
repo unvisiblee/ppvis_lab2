@@ -6,6 +6,7 @@ import database.StudentsLocalStorage;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StudentsController {
     private StudentsLocalStorage students;
@@ -25,14 +26,14 @@ public class StudentsController {
         indexWindow.updateTable();
     }
 
-    public ArrayList<Student> select(Student student) {
-        ArrayList<Student> searchResults = students.applyFilters(student);
+    public List<Student> select(Student student) {
+        List<Student> searchResults = students.applyFilters(student);
         return searchResults;
     }
 
     public void remove(Student student) {
-        ArrayList<Student> searchResults = students.applyFilters(student);
-        ArrayList<Student> students = this.students.getRecords();
+        List<Student> searchResults = students.applyFilters(student);
+        List<Student> students = this.students.getRecords();
         students.removeAll(searchResults);
         this.students.setRecords(students);
         new Alert(getRemovedRecordsList(searchResults));
@@ -54,7 +55,7 @@ public class StudentsController {
         return students;
     }
 
-    private String getRemovedRecordsList(ArrayList<Student> removedRecords) {
+    private String getRemovedRecordsList(List<Student> removedRecords) {
         if (removedRecords.size() == 0) {
             return "No matches.";
         }
