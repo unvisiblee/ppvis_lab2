@@ -6,8 +6,8 @@ It designed by MVC pattern and use [**this**](https://sourceforge.net/projects/j
 ### Install
 
 ```bash
-git clone https://github.com/ARtoriouSs/hospital.git
-cd hospital
+git clone git@github.com:TanyaAkulich/students.git
+cd students
 ```
 
 * compile  
