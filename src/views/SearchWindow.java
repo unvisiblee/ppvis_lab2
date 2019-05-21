@@ -1,20 +1,24 @@
 package views;
 
-import controllers.AppointmentsController;
-import models.Appointment;
+import controllers.StudentsController;
+import dataGetters.StudentFormGetter;
+import models.Parent;
+import models.Student;
+import database.StudentsLocalStorage;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 public class SearchWindow {
-    private AppointmentsController controller;
+    private StudentsController controller;
     private JFrame searchWindow;
     private TablePartial table;
+    private StudentsLocalStorage storage;
+    private StudentFormGetter getter;
 
-    public SearchWindow(AppointmentsController controller) {
+    public SearchWindow(StudentsController controller) {
         this.controller = controller;
         searchWindow = new JFrame("Search");
         searchWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -24,7 +28,7 @@ public class SearchWindow {
         contentPane.setLayout(new BorderLayout());
         contentPane.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
-        AppointmentFormPartial form = new AppointmentFormPartial(controller);
+        StudentFormPartial form = new StudentFormPartial(controller);
         JPanel panel = form.getPanel();
 
         JButton closeButton = new JButton("Close");
@@ -34,7 +38,7 @@ public class SearchWindow {
         panel.add(closeButton);
         panel.add(searchButton);
 
-        table = new TablePartial(controller.getAppointments().getRecords());
+        table = new TablePartial(controller.getStudents().getRecords());
         contentPane.add(table.getPanel(), BorderLayout.CENTER);
         contentPane.add(panel, BorderLayout.WEST);
 
@@ -50,28 +54,20 @@ public class SearchWindow {
         searchWindow.dispose();
     }
 
-    public void updateTable(ArrayList<Appointment> appointments) {
-        table.setData(appointments);
+    public void updateTable(List<Student> students) {
+        table.setData(students);
     }
 
     private ActionListener getCloseButtonListener() {
         return e -> dispose();
     }
 
-    private ActionListener getSearchButtonListener(AppointmentFormPartial form) {
+    private ActionListener getSearchButtonListener(StudentFormPartial form) {
         return e -> {
-            HashMap<String, String> params = new HashMap<String, String>();
-            params.put("patientName", form.getPatientName());
-            params.put("patientSurname", form.getPatientSurname());
-            params.put("patientCity", form.getPatientCity());
-            params.put("patientStreet", form.getPatientStreet());
-            params.put("patientBuildingNumber", form.getPatientBuildingNumber());
-            params.put("patientBirthDate", form.getPatientBirthDate());
-            params.put("doctorName", form.getDoctorName());
-            params.put("doctorSurname", form.getDoctorSurname());
-            params.put("date", form.getDate());
-            params.put("diagnosis", form.getDiagnosis());
-            controller.select(params);
+
+            StudentFormGetter getter = new StudentFormGetter();
+            Student student = getter.getData(form);
+            updateTable(controller.select(student));
         };
     }
 }

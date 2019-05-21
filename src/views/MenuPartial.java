@@ -1,6 +1,6 @@
 package views;
 
-import controllers.AppointmentsController;
+import controllers.StudentsController;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -9,26 +9,41 @@ import java.io.File;
 
 public class MenuPartial {
     private JMenuBar menuBar;
-    private AppointmentsController controller;
+    private StudentsController controller;
 
-    public MenuPartial(AppointmentsController controller) {
+    public MenuPartial(StudentsController controller) {
         this.controller = controller;
 
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter(".xml","xml"));
 
         menuBar = new JMenuBar();
+
         JMenu menu = new JMenu("File");
         JMenuItem openItem = new JMenuItem("Open");
         JMenuItem saveItem = new JMenuItem("Save");
-        JMenuItem saveAsItem = new JMenuItem("Save as");
+
+        JMenu action = new JMenu("Action");
+        JMenuItem createItem = new JMenuItem("Create");
+        JMenuItem deleteItem = new JMenuItem("Delete");
+        JMenuItem searchItem = new JMenuItem("Search");
+
         openItem.addActionListener(getOpenItemListener(fileChooser));
-        saveItem.addActionListener(getSaveItemListener());
-        saveAsItem.addActionListener(getSaveAsItemListener(fileChooser));
+        saveItem.addActionListener(getSaveItemListener(fileChooser));
+
+        createItem.addActionListener(getCreateItemListener());
+        deleteItem.addActionListener(getDeleteItemListener());
+        searchItem.addActionListener(getSearchItemListener());
+
         menu.add(openItem);
         menu.add(saveItem);
-        menu.add(saveAsItem);
+
+        action.add(createItem);
+        action.add(deleteItem);
+        action.add(searchItem);
+
         menuBar.add(menu);
+        menuBar.add(action);
     }
 
     public JMenuBar getMenuBar() {
@@ -39,19 +54,18 @@ public class MenuPartial {
         return e -> {
             int response = fileChooser.showOpenDialog(null);
             if (response == JFileChooser.APPROVE_OPTION) {
-                File file = fileChooser.getSelectedFile();;
+                File file = fileChooser.getSelectedFile();
                 controller.open(file);
+
+                IndexWindow indexWindow = new IndexWindow(controller);
+                indexWindow.updateTable();
+                indexWindow.show();
+
             }
         };
     }
 
-    private ActionListener getSaveItemListener() {
-        return e -> {
-            controller.save();
-        };
-    }
-
-    private ActionListener getSaveAsItemListener(JFileChooser fileChooser) {
+    private ActionListener getSaveItemListener(JFileChooser fileChooser) {
         return e -> {
             int response = fileChooser.showSaveDialog(null);
             if (response == JFileChooser.APPROVE_OPTION) {
@@ -59,5 +73,20 @@ public class MenuPartial {
                 controller.save(file);
             }
         };
+    }
+
+    private ActionListener getCreateItemListener() {
+        NewWindow window = new NewWindow(controller);
+        return e -> window.show();
+    }
+
+    private ActionListener getDeleteItemListener() {
+        DeleteWindow window = new DeleteWindow(controller);
+        return e -> window.show();
+    }
+
+    private ActionListener getSearchItemListener() {
+        SearchWindow window = new SearchWindow(controller);
+        return e -> window.show();
     }
 }

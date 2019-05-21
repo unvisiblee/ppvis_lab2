@@ -1,25 +1,27 @@
 package views;
 
-import controllers.AppointmentsController;
+import controllers.StudentsController;
+import dataGetters.StudentFormGetter;
+import models.Parent;
+import models.Student;
 
 import java.awt.event.ActionListener;
-import java.util.HashMap;
 import javax.swing.*;
 
 public class NewWindow {
-    private AppointmentsController controller;
+    private StudentsController controller;
     private JFrame newWindow;
 
-    public NewWindow(AppointmentsController controller) {
+    public NewWindow(StudentsController controller) {
         this.controller = controller;
-        newWindow = new JFrame("New appointment");
+        newWindow = new JFrame("New student");
         newWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         newWindow.setLocationRelativeTo(null);
 
         JPanel contentPane = new JPanel();
         contentPane.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
-        AppointmentFormPartial form = new AppointmentFormPartial(controller);
+        StudentFormPartial form = new StudentFormPartial(controller);
         JPanel panel = form.getPanel();
 
         JButton closeButton = new JButton("Close");
@@ -47,20 +49,16 @@ public class NewWindow {
         return e -> dispose();
     }
 
-    private ActionListener getSubmitButtonListener(AppointmentFormPartial form) {
+    private ActionListener getSubmitButtonListener(StudentFormPartial form) {
         return e -> {
-            HashMap<String, String> params = new HashMap<String, String>();
-            params.put("patientName", form.getPatientName());
-            params.put("patientSurname", form.getPatientSurname());
-            params.put("patientCity", form.getPatientCity());
-            params.put("patientStreet", form.getPatientStreet());
-            params.put("patientBuildingNumber", form.getPatientBuildingNumber());
-            params.put("patientBirthDate", form.getPatientBirthDate());
-            params.put("doctorName", form.getDoctorName());
-            params.put("doctorSurname", form.getDoctorSurname());
-            params.put("date", form.getDate());
-            params.put("diagnosis", form.getDiagnosis());
-            controller.create(params);
+            StudentFormGetter getter = new StudentFormGetter();
+            Student student = getter.getData(form);
+
+            controller.create(student);
+
+            IndexWindow indexWindow = new IndexWindow(this.controller);
+            indexWindow.updateTable();
+            indexWindow.show();
         };
     }
 }

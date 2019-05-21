@@ -1,16 +1,16 @@
 package views;
 
-import controllers.AppointmentsController;
+import controllers.StudentsController;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class ControlsPartial {
-    private AppointmentsController controller;
+    private StudentsController controller;
     private JPanel panel = new JPanel(new GridLayout(15, 1, 0, 10));
 
-    public ControlsPartial(AppointmentsController controller) {
+    public ControlsPartial(StudentsController controller) {
         this.controller = controller;
         JButton addButton = new JButton("Add");
         JButton searchButton = new JButton("Search");
@@ -32,14 +32,17 @@ public class ControlsPartial {
     }
 
     private ActionListener getAddButtonListener() {
-        return e -> controller.newRecord();
+        NewWindow window = new NewWindow(controller);
+        return e -> window.show();
     }
 
     private ActionListener getSearchButtonListener() {
-        return e -> controller.search();
+        SearchWindow window = new SearchWindow(controller);
+        return e -> window.show();
     }
 
     private ActionListener getDeleteButtonListener() {
-        return e -> controller.delete();
+        DeleteWindow window = new DeleteWindow(controller);
+        return e -> window.show();
     }
 }
