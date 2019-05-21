@@ -43,6 +43,8 @@ public class TablePartial {
         JLabel updatePerPageLabel = new JLabel("Per page:");
         updatePerPageField = new JTextField(String.valueOf(perPage), 4);
         updatePerPageField.getDocument().addDocumentListener(getUpdatePerPageListener(this));
+        JLabel recortsCount = new JLabel("Total count: " + String.valueOf(students.size()));
+
         JPanel pageControlPanel = new JPanel();
         pageControlPanel.add(updatePerPageLabel);
         pageControlPanel.add(updatePerPageField);
@@ -51,6 +53,8 @@ public class TablePartial {
         pageControlPanel.add(currentPageLabel);
         pageControlPanel.add(nextButton);
         pageControlPanel.add(lastPageButton);
+        pageControlPanel.add(recortsCount);
+
 
         panel.add(scrollPane, BorderLayout.CENTER);
         panel.add(pageControlPanel, BorderLayout.SOUTH);
